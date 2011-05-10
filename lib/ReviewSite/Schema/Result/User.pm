@@ -29,7 +29,7 @@ __PACKAGE__->table("users");
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 user_name
+=head2 username
 
   data_type: 'varchar'
   is_nullable: 1
@@ -41,7 +41,7 @@ __PACKAGE__->table("users");
 
 =head2 first name
 
-  accessor: 'first_name'
+  accessor: 'firstname'
   data_type: 'varchar'
   is_nullable: 1
 
@@ -60,11 +60,11 @@ __PACKAGE__->table("users");
 __PACKAGE__->add_columns(
   "user_id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "user_name",
+  "username",
   { data_type => "varchar", is_nullable => 1 },
   "password",
   { data_type => "varchar", is_nullable => 1 },
-  "first name",
+  "firstname",
   { accessor => "first_name", data_type => "varchar", is_nullable => 1 },
   "lastname",
   { data_type => "varchar", is_nullable => 1 },
