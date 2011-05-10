@@ -25,7 +25,6 @@ sub index :Path :Args(0) {
     my $username = $c->request->params->{ username };
     my $password = $c->request->params->{ password };
     $c->stash( title => 'Login' );
-    $c->stash( template => 'login.tt' );
     if( $c->req->method eq 'POST' ) {
         if( $c->authenticate( { username => $username,
                                 password => $password  } ) ) {
