@@ -6,6 +6,18 @@ package ReviewSite::Schema;
 use Moose;
 use namespace::autoclean;
 extends 'DBIx::Class::Schema';
+=head1 NAME
+
+ReviewSite::Schema;
+
+
+=head1 DESCRIPTION
+
+Catalyst Schema.
+
+=head1 METHODS
+
+=cut
 
 __PACKAGE__->load_namespaces;
 
