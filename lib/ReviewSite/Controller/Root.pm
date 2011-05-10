@@ -50,7 +50,7 @@ Check if there is  user and, if not, forward to login page
 =cut
 sub auto :Private {
     my ( $self, $c ) = @_;
-    if ( $c->controller eq $c->controller( 'Login' ) ) {
+    if ( $c->controller eq $c->controller( 'Login' ) or $c->controller eq $c->controller('Home')or $c->controller eq $c->controller('')) {
         return 1;
     }
         # If a user doesn't exist, force login

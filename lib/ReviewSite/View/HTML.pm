@@ -11,7 +11,7 @@ __PACKAGE__->config(
     INCLUDE_PATH => [
         ReviewSite->path_to( 'root', 'template' ),
     ],
-   # WRAPPER => 'wrapper.tt',
+    WRAPPER => 'wrapper.tt',
 );
 =head1 NAME
 
