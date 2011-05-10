@@ -19,7 +19,10 @@ requires 'Config::General'; # This should reflect the config file format you've 
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 test_requires 'Test::More' => '0.88';
 catalyst;
-
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::Store::File';
+requires 'Catalyst::Plugin::Session::State::Cookie';
 install_script glob('script/*.pl');
 auto_install;
 WriteAll;

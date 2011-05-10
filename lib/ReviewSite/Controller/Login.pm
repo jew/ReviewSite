@@ -15,8 +15,8 @@ Catalyst Controller.
 
 =cut
 
-=head2 login
-  Login logic
+=head2 index
+  use for Login 
 =cut
 
 sub index :Path :Args(0) {
