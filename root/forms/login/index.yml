@@ -1,0 +1,23 @@
+---
+indicator: password
+auto_fieldset: 1
+elements:
+        
+    - type: Text
+      name: username
+      constraints: 
+        - type: Required
+          message: Missing username.
+      auto_label: username
+        
+    - type: Password
+      name: password
+      constraints:
+        - type: Required
+          message: Missing password.
+      auto_label: password
+      
+    - type: Submit
+      name: submit
+constraints:
+    - SingleValue
