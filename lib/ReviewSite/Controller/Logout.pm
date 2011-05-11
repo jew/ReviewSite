@@ -18,7 +18,7 @@ Catalyst Controller.
 
 
 =head2 index
-
+Logout
 =cut
 
 sub index :Path :Args(0) {
