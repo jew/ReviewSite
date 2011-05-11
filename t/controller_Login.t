@@ -7,6 +7,8 @@ ok( my $mech = Test::WWW::Mechanize::Catalyst->new, 'Created mech object' );
 #test for fail login
 $mech->get_ok( 'http://localhost:3000/login','test URL' );
 $mech->title_is( "Login" ,'TITLE' );
+$mech->text_contains( "username" );
+$mech->text_contains( "password" );
 $mech->field( 'username','jew1' );
 $mech->field( 'password','jewabc1' );
 $mech->submit_form_ok();
@@ -18,4 +20,5 @@ $mech->field( 'password','jewabc' );
 $mech->submit_form_ok();
 $mech->title_unlike( qr/Login/ , 'Title Unlike' );
 $mech->title_is( "Home" );
+
 done_testing();
