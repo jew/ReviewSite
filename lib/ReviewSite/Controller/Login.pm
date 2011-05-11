@@ -1,7 +1,7 @@
 package ReviewSite::Controller::Login;
 use Moose;
 use namespace::autoclean;
-BEGIN {extends 'Catalyst::Controller'; }
+BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
 =head1 NAME
 
@@ -19,11 +19,12 @@ Catalyst Controller.
   use for Login 
 =cut
 
-sub index :Path :Args(0) {
+sub index :Path :Args(0) FormConfig {
     my ( $self, $c ) = @_;
     # Get the username and password from form
-    my $username = $c->request->params->{ username };
-    my $password = $c->request->params->{ password };
+    my $form = $c->stash->{form};
+    my $username = $form->params->{ username };
+    my $password = $form->params->{ password };
     $c->stash( title => 'Login' );
     if( $c->req->method eq 'POST' ) {
         if( $c->authenticate( { username => $username,
