@@ -23,7 +23,6 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
     $c->stash( title => 'Home' );
 }
 
