@@ -1,6 +1,16 @@
 ---
-indicator:submit
-
+indicator: username
+auto_fieldset: 1
 elements:
-	- Blah
-
+    - type: Text
+      name: username
+      constraints:
+        - Required
+    - type: Password
+      name: password
+      constraints:
+        - Required
+    - type: Submit
+      name: submit
+constraints :
+    - SingleValue

@@ -9,8 +9,9 @@ $mech->get_ok( 'http://localhost:3000/login','test URL' );
 $mech->title_is( "Login" ,'TITLE' );
 $mech->field( 'username','jew1' );
 $mech->field( 'password','jewabc1' );
+$mech->field( 'submit','1' );
 $mech->submit_form_ok();
-$mech->content_contains( 'Bad username or password' );
+$mech->content_contains( 'Bad username or password' ) or diag($mech->content);
 #test for successfully login 
 $mech->get_ok( 'http://localhost:3000/login','test URL' );
 $mech->field( 'username','jew' );

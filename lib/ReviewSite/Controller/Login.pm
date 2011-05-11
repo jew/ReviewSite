@@ -23,10 +23,11 @@ sub index :Path :Args(0) FormConfig {
     my ( $self, $c ) = @_;
     # Get the username and password from form
     my $form = $c->stash->{form};
-    my $username = $form->params->{ username };
-    my $password = $form->params->{ password };
     $c->stash( title => 'Login' );
-    if( $c->req->method eq 'POST' ) {
+    if( $form->submitted_and_valid ) {
+        my $username = $form->param_value( 'username' );
+        my $password = $form->param_value( 'password' );
+    	$c->log->debug( "username" . $username );
         if( $c->authenticate( { username => $username,
                                 password => $password  } ) ) {
             #  successful
@@ -38,6 +39,10 @@ sub index :Path :Args(0) FormConfig {
             $c->stash( error_msg => "Bad username or password." );
         }
     }
+        else {
+            # Set an error message
+            $c->stash( error_msg => "Bad username or password." );
+        }
 }
 =head1 AUTHOR
 
