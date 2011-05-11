@@ -24,7 +24,7 @@ Catalyst Controller.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
     $c->logout;
-    $c->response->redirect($c->uri_for('/home'));
+    $c->response->redirect( $c->uri_for( '/home' ) );
 }
 
 
