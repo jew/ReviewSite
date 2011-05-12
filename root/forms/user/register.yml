@@ -9,6 +9,8 @@ elements:
         - type: Required
           message: Missing username.
       auto_label: username
+      id: check_username_availability
+
       
     - type: Password
       name: password
