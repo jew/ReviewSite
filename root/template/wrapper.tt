@@ -43,8 +43,8 @@ body {
                     <li class ="ui-state-default ui-corner-all" ><a href="[% c.uri_for('/home') %]">[Home]</a></li>
 	                <li class ="ui-state-default ui-corner-all">[Find review]</li>
 	                [% IF !c.user_exists %]
+                    <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/user/register')%]">[Register]</a></li>
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/login')%]">[Sign in]</a></li>
-                    
 	                [% ELSE %]
                     <li class ="ui-state-default ui-corner-all">[Write a review]</li>
 	                <li class ="ui-state-default ui-corner-all">[Invite Friend]</li>
