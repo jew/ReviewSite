@@ -1,1 +1,3 @@
 [%form.render%]
+[% status_msg %]
+[% error_msg %]

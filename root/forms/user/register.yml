@@ -9,14 +9,17 @@ elements:
         - type: Required
           message: Missing username.
       auto_label: username
-        
+      
     - type: Password
       name: password
       constraints:
-        - type: Required
-          message: Missing password.
+        - type: Equal
+          others:
+            - repeat_pass
       auto_label: password
-      
+    - name: repeat_pass
+      auto_label: Confirm  password
+
     - type: Text
       name: firstname
       constraints:
@@ -31,7 +34,18 @@ elements:
           message: Missing lastname.
       auto_label: lastname
       
+    - name: email
+      constraints:
+        - type: Email
+        - type: Equal
+          others:
+            - repeat_email
+      auto_label: Email
+    - name: repeat_email
+      auto_label: Please confirm Email
+    
     - type: Submit
       name: submit
+      value: Submit
 constraints:
     - SingleValue
