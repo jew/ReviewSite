@@ -16,7 +16,7 @@ $mech->content_contains( 'Bad username or password' );
 #test for successfully login 
 $mech->get_ok( 'http://localhost:3000/login','test URL' );
 $mech->field( 'username','jew' );
-$mech->field( 'password','jewabc' );
+$mech->field( 'password','123' );
 $mech->submit_form_ok();
 $mech->title_unlike( qr/Login/ , 'Title Unlike' );
 $mech->title_is( "Home" );
