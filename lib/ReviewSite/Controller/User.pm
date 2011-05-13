@@ -74,11 +74,9 @@ sub checkAvaliable :Local {
 	my $result   = $c->model('DB::User')->search( {username => $username} );
 	if($result->first()->username() eq $username){  
         $c->response->body( 0 ); 
-        return  0;  
     }else{  
         #//else if it's not bigger then 0, then it's available '  
         $c->response->body( 1 );
-        return 1;  
     }  
 
 }
