@@ -24,17 +24,16 @@ function check_availability(){
 //get the username  
 var username = $('#check_username_availability').val();  
 //use ajax to run the check  
-$.post("/user/checkAvaliable", { username: username },  
+$.post("/user/check", { username: username },  
 function(result){  
+    $('#alert_txt').remove();
     //if the result is 1  
-    if(result == 1){  
-    	$('<span id="alert_txt">' + username +'' + 'is  Available </span>')
+    if(result == 1){
+    	$('#check_username_availability').after('<span id="alert_txt">' + username +' ' + 'is Available </span>');  
     //show that the username is available  
         //$('#username_availability_result').html(username + ' is Available');  
     }else{  
         //show that the username is NOT available  
-        console.log(username);
-        $('#alert_txt').remove();
         $('<span id="alert_txt">' + username +' ' + 'is not Available </span>')
         .appendTo('div.text:first');
         $('#username_availability_result').html(username + ' is not Available');  
