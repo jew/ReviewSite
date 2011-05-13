@@ -19,15 +19,6 @@ Catalyst Controller.
 =cut
 
 
-=head2 index
-
-=cut
-
-sub index :Path :Args(0)  {
-    my ( $self, $c ) = @_;
-
-}
-
 =head2 register
 Register
 =cut
@@ -45,6 +36,7 @@ sub register :Local FormConfig {
     $c->stash( title => "Register" );
     my $result;
     if ( $form->submitted_and_valid ) {
+    	$c->log->debug("VALID");
         $result = $c->model( 'DB::User' )->create ( {
             username  => $username,
             password  => $password,
@@ -52,38 +44,27 @@ sub register :Local FormConfig {
             lastname  => $lastname,
             email     => $email
     	} );
-    	
-    	if ( $result->username eq $username ) {
-    		$c->stash( status_msg => "complete!" );
-    	} else {
-    		$c->stash( error_msg => "uncomplete!" );
-    		
-    	}
-
+        $c->stash( status_msg => "complete!" );
+	} else {
+		$c->log->debug(join ("\n", @{ $form->get_errors}));
 	}
 	
 }
 
 
-=head checkuser
-Check available name for user
+=head2 check
+ Check available name for user
 =cut
-sub checkAvaliable :Local {
-	my ( $self,$c ) = @_;
-	my $username = $c->request->param( 'username' );
-	my $result   = $c->model('DB::User')->search( {username => $username} );
-	if($result->first()->username() eq $username){  
-        $c->response->body( 0 ); 
-    }else{  
-        #//else if it's not bigger then 0, then it's available '  
-        $c->response->body( 1 );
-    }  
 
+sub check :Local {  
+	my ( $self, $c ) = @_;
+	my $result   = $c->model('DB::User')->find( {username => $c->request->param( 'username' )} );
+	if ( $result ) { #Return 0 if not available
+		$c->res->body(0);
+	} else {
+		$c->res->body(1);
+	}
 }
-
-
-
-
 
 
 

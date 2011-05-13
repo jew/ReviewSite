@@ -36,4 +36,9 @@ Test::create_users(); #Creating user.
 	ok $delete , 'deleted  row';
 }
 
+{#Test search from checkAvaliable
+    my $user  = $schema->resultset('User')->search({username => 'A'})->first;
+	is( $user->username, 'A', 'Correct username' );
+	
+}
 done_testing();
