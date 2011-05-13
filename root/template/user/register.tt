@@ -35,7 +35,7 @@ function(result){
         //show that the username is NOT available  
         console.log(username);
         $('#alert_txt').remove();
-        $('<span id="alert_txt">' + username +'' + 'is not Available </span>')
+        $('<span id="alert_txt">' + username +' ' + 'is not Available </span>')
         .appendTo('div.text:first');
         $('#username_availability_result').html(username + ' is not Available');  
         }  
