@@ -43,7 +43,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 #set relationship later
-__PACKAGE__-> has_many( "place" => 'Gallery::Schema::Result::Place',
+__PACKAGE__-> has_many( "place" => 'ReviewSite::Schema::Result::Place',
 {"foreign.id"=>"self.id"},
 );
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42

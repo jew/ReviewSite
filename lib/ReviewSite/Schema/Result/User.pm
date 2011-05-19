@@ -73,7 +73,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("user_id");
 #set relationship later
-__PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
+__PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.user_id"=>"self.user_id"},
 );
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42

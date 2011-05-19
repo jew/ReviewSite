@@ -74,9 +74,9 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("place_id");
 #set relationship later
-__PACKAGE__-> belongs_to( "type","Gallery::Schema::Result::Type",
+__PACKAGE__-> belongs_to( "type","ReviewSite::Schema::Result::Type",
 { id => "id"},);
-__PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
+__PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
 =head

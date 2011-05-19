@@ -64,9 +64,9 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("review_id");
 #set relationship later
-__PACKAGE__-> belongs_to( "user","Gallery::Schema::Result::User",
+__PACKAGE__-> belongs_to( "user","ReviewSite::Schema::Result::User",
 { user_id => "user_id"},);
-__PACKAGE__-> belongs_to( "place","Gallery::Schema::Result::Place",
+__PACKAGE__-> belongs_to( "place","ReviewSite::Schema::Result::Place",
 { place_id => "place_id"},);
 
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
