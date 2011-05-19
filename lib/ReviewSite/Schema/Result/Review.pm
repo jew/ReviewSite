@@ -1,4 +1,4 @@
-package ReviewSite::Schema::Result::User;
+package ReviewSite::Schema::Result::Review;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -15,67 +15,60 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-ReviewSite::Schema::Result::User
+ReviewSite::Schema::Result::Place
 
 =cut
 
-__PACKAGE__->table("users");
+__PACKAGE__->table("reviews");
 
 =head1 ACCESSORS
 
-=head2 user_id
+=head2 review_id
 
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
 
-=head2 username
+=head2 user_id
+
+  data_type: 'integer'
+  is_nullable: 1
+
+=head2 place_id
 
   data_type: 'varchar'
   is_nullable: 1
 
-=head2 password
+=head2 detail
 
   data_type: 'varchar'
   is_nullable: 1
 
-=head2 first name
-
-  accessor: 'firstname'
-  data_type: 'varchar'
-  is_nullable: 1
-
-=head2 lastname
+=head2 rate
 
   data_type: 'varchar'
   is_nullable: 1
-
-=head2 email
-
-  data_type: 'varchar'
-  is_nullable: 1
-
 =cut
 
 __PACKAGE__->add_columns(
-  "user_id",
+  "review_id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "username",
-  { data_type => "varchar", is_nullable => 1 },
-  "password",
-  { data_type => "varchar", is_nullable => 1 },
-  "firstname",
-  { accessor => "first_name", data_type => "varchar", is_nullable => 1 },
-  "lastname",
-  { data_type => "varchar", is_nullable => 1 },
-  "email",
-  { data_type => "varchar", is_nullable => 1 },
+  "user_id",
+  { data_type => "integer", is_nullable => 1 },
+  "place_id",
+  { data_type => "integer", is_nullable => 1 },
+  "detail",
+  { data_type => "varchar", data_type => "varchar", is_nullable => 1 },
+  "rate",
+  { data_type => "integer", is_nullable => 1 },
 );
-__PACKAGE__->set_primary_key("user_id");
+__PACKAGE__->set_primary_key("review_id");
 #set relationship later
-__PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
-{"foreign.user_id"=>"self.user_id"},
-);
+__PACKAGE__-> belongs_to( "user","Gallery::Schema::Result::User",
+{ user_id => "user_id"},);
+__PACKAGE__-> belongs_to( "place","Gallery::Schema::Result::Place",
+{ place_id => "place_id"},);
+
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g
 
