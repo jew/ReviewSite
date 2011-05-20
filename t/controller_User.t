@@ -43,4 +43,22 @@ $mech->get_ok( 'http://localhost:3000/user/check/?username=mm' );
 $mech->content_contains( '1','Available username' );
 diag($mech->content);
 
+#test searching review
+#found
+$mech->get_ok( 'http://localhost:3000/user/search' );
+$mech->title_is( "Search Review" );
+$mech->field( 'placename',"BB" );
+$mech->field( 'types',"1" );
+$mech->submit_form_ok();
+$mech->content_contains( "Business Name" );
+
+
+#not found
+$mech->get_ok( 'http://localhost:3000/user/search' );
+$mech->title_is( "Search Review" );
+$mech->field( 'placename',"ABC" );
+$mech->field( 'types',"1" );
+$mech->submit_form_ok();
+$mech->content_contains( "No Review" );
+
 done_testing();
