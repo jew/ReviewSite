@@ -62,6 +62,10 @@ Which Business Would You Like to Review?
     [%place_id%]
     <a href="/reviewSite/[%place_id%]/writeReview">Write a review</a>
 [%ELSE%]
+<td>
+    [% # Add a link to add a review %]
+    <a href="[%c.uri_for('/reviewsite/addPlace')%]">Dont have here !ADD</a>
+    </td>
 [%IF x %]
 [% x %]
 <td>
