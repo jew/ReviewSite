@@ -1,0 +1,37 @@
+---
+action: 
+auto_fieldset: 1
+
+elements:
+      - type: Textarea
+        name: detail
+        label: Your Review
+
+        # Another text field for the numeric rating
+      - type: Text
+        name: rating
+        label: Rating
+        attributes:
+            title: Enter a rating between 1 and 5 here
+        constraints:
+        # Make sure it's a number
+          - type: Integer
+            message: "Required. Digits only, please."
+        # Check the min & max values
+          - type: Range
+            min: 1
+            max: 5
+            message: "Must be between 1 and 5."
+       
+      - type: Submit
+        name: submit
+        value: Submit
+      
+# Global filters and constraints.
+constraints:
+      - Required
+filter:
+      # Remove whitespace at both ends
+      - TrimEdges
+      # Escape HTML characters for safety
+      - HTMLEscape
