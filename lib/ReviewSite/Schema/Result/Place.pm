@@ -84,6 +84,11 @@ __PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
 =cut
+
+sub rate {
+	my ( $self ) = @_;
+	return $self->review->get_column('rate')->sum()/$self->review->count();
+}
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g
 

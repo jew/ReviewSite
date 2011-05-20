@@ -58,7 +58,7 @@ __PACKAGE__->add_columns(
   "place_id",
   { data_type => "integer", is_nullable => 1 },
   "detail",
-  { data_type => "varchar", data_type => "varchar", is_nullable => 1 },
+  { data_type => "varchar", is_nullable => 1 },
   "rate",
   { data_type => "integer", is_nullable => 1 },
 );

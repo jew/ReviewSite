@@ -65,7 +65,7 @@ __PACKAGE__->add_columns(
   "password",
   { data_type => "varchar", is_nullable => 1 },
   "firstname",
-  { accessor => "first_name", data_type => "varchar", is_nullable => 1 },
+  { data_type => "varchar", is_nullable => 1 },
   "lastname",
   { data_type => "varchar", is_nullable => 1 },
   "email",
