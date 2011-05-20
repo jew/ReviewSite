@@ -1,0 +1,13 @@
+<div>
+    <div>
+        Category : [%typeplacename%]
+    </div>
+    <div>
+        Business name : [%placename%]
+    </div>
+</div>
+
+
+
+[%form.render%]
+[%status_msg%]

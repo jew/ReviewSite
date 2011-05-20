@@ -18,21 +18,11 @@ Catalyst Controller.
 =cut
 
 
-=head2 index
-
-=cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->response->body('Matched ReviewSite::Controller::Review in Review.');
-}
-
 =head2 base
 
 =cut
 
-sub base :Chained( '/' ) :PathPart( 'review' ) :CaptureArgs(1) {
+sub base :Chained( '/' ) :PathPart( 'reviewSite' ) :CaptureArgs(1) {
     my( $self,$c,$place_id ) = @_;
     my $form = $c->stash-> { form };
     $c->stash( place => $c->model( 'DB::Place' )->find($place_id) );
@@ -51,11 +41,12 @@ sub searchBusiness :Local :FormConfig {
 	#use Data::Dumper;
 	#$c->log->debug(Dumper(@type_objs));
     foreach ( @type_objs ) {
-        push( @types, [$_->id, $_->placename]);
+        push( @types, [$_->id, $_->placename ] );
         # Get the select added by the config file
     }
     my $select = $form->get_all_element( { type => 'Select' } );
     $select->options( \@types );
+    $c->stash( x => 0);
     if ( $form->submitted_and_valid ) {
         my $types  = $form->param_value( 'types' );
         my $bname  = $form->param_value( 'business_name' );
@@ -63,14 +54,16 @@ sub searchBusiness :Local :FormConfig {
         #$c->log->debug( Dumper( $result ) );
         
         if ( $result ) { 
-        	#show value to template
-            $c->stash(value => 1  );
+            #show value to template
+            #my $review_rs = $c->model( 'DB::Review' )->search({ place_id => $result->place_id()  });
+            my $review_rs = $result->review;
+            $c->stash(value => 1 , review_rs => $review_rs ,review => $result ,place_id => $result->place_id() ,place => $result);
         } else {
         	#no value ADD new
-            $c->stash( value => 2 );
+            $c->stash( value => 0 );
           
         }
-    	
+   
     }
 	
 }

@@ -43,8 +43,8 @@ $mech->content_contains("Write a review");
 #Test Sub add AddPlace
 $mech->get_ok( 'http://localhost:3000/reviewsite/addPlace' );
 $mech->title_is( "ADD NEW PALCE" );
-$mech->field( 'types', '1' );
-$mech->field( 'placename', 'BB' );
+$mech->field( 'types', '2' );
+$mech->field( 'placename', 'CC' );
 $mech->field( 'lat', '12.11' );
 $mech->field( 'lng', '12.11' );
 $mech->field( 'location', 'Bangkok' );
@@ -54,7 +54,7 @@ $mech->submit_form_ok();
 $mech->content_contains("complete!");
 
 #Test Sub writeReview
-$mech->get_ok( 'http://localhost:3000/review/5/writeReview' );
+$mech->get_ok( 'http://localhost:3000/reviewSite/5/writeReview' );
 $mech->title_is( "Write a review" );
 $mech->field( 'place_id','5' );
 $mech->field( 'detail','Nice place ,Good service' );
