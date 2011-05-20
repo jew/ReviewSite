@@ -1,0 +1,25 @@
+---
+action: 
+auto_fieldset: 1
+
+elements:
+        
+      - type: Select
+        name: types
+        label: Place
+        multiple: 1
+        size: 4
+        
+      - type: Text
+        name: businessname
+        label: Business Name
+        # This is an optional 'mouse over' title pop-up
+        attributes:
+          title: Enter Business Name here
+      
+      - type: Submit
+        name: submit
+        value: Submit
+      
+constraints:
+      - SingleValue
