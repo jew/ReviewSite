@@ -36,15 +36,15 @@ __PACKAGE__->table("types");
 =cut
 
 __PACKAGE__->add_columns(
-  "id",
+  "type_id",
   { data_type => "integer", is_nullable => 0 },
   "placename",
   { data_type => "varchar", is_nullable => 1 },
 );
-__PACKAGE__->set_primary_key("id");
+__PACKAGE__->set_primary_key("type_id");
 #set relationship later
 __PACKAGE__-> has_many( "place" => 'ReviewSite::Schema::Result::Place',
-{"foreign.id"=>"self.id"},
+{"foreign.type_id"=>"self.type_id"},
 );
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g

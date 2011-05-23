@@ -63,19 +63,19 @@ __PACKAGE__->add_columns(
   "placename",
   { data_type => "varchar", is_nullable => 1 },
   "la",
-  { data_type => "float", is_nullable => 1 },
+  { data_type => "double", is_nullable => 1 },
   "long",
-  { data_type => "long", data_type => "varchar", is_nullable => 1 },
+  {  data_type => "double", is_nullable => 1 },
   "location",
   { data_type => "varchar", is_nullable => 1 },
   #from Type
-   "id",
+   "type_id",
   { data_type => "integer", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("place_id");
 #set relationship later
 __PACKAGE__-> belongs_to( "type","ReviewSite::Schema::Result::Type",
-{ id => "id"},);
+{ type_id => "type_id"},);
 __PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
@@ -84,10 +84,10 @@ __PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
 =cut
-
+#error
 sub rate {
 	my ( $self ) = @_;
-	return $self->review->get_column('rate')->sum()/$self->review->count();
+		return $self->review->get_column('rate')->sum()/$self->review->count();
 }
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g
