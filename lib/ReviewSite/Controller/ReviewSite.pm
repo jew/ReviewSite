@@ -50,8 +50,7 @@ sub searchBusiness :Local :FormConfig {
     if ( $form->submitted_and_valid ) {
         my $types  = $form->param_value( 'types' );
         my $bname  = $form->param_value( 'business_name' );
-        my $result = $c->model( 'DB::Place' )->find( { placename => $bname,id => $types } );
-        #$c->log->debug( Dumper( $result ) );
+        my $result = $c->model( 'DB::Place' )->find( { placename => $bname,type_id => $types } );
         
         if ( $result ) { 
             #show value to template
@@ -60,7 +59,7 @@ sub searchBusiness :Local :FormConfig {
             $c->stash(value => 1 , review_rs => $review_rs ,review => $result ,place_id => $result->place_id() ,place => $result);
         } else {
         	#no value ADD new
-            $c->stash( value => 0 );
+            $c->stash( value => 2 );
           
         }
    
@@ -94,7 +93,7 @@ sub addPlace :Local {
 		    la         => $latitude,
 			long       => $longitude,
 			location   => $location,
-			id         => $types ,
+			type_id         => $types ,
 		} );
 		#insert into Review
 		my $place_id = $place->place_id();
