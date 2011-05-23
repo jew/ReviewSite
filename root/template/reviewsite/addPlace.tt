@@ -129,7 +129,7 @@ $(document).ready(function(){
             </td>
         </tr>
     </table> 
-    <INPUT TYPE=SUBMIT>
+    <INPUT name ="submit" TYPE=SUBMIT>
 </form>
 </div>
 [%status_msg%]
