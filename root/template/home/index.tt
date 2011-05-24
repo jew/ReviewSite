@@ -1,1 +1,78 @@
 <title>[% title %]</title>
+Best of our reviews
+
+<table border="0" width="500 px;">
+    <tr>
+        <td>
+            Restaurants
+				<table border="0" >
+				    [%WHILE (restaurant = restaurants.next)%]
+				    <tr>
+				        <td>
+				        
+				            <div>
+				            [%restaurant.placename%]
+				            
+				            </div>
+                            
+                            [%i =0;%]
+				                [%WHILE i < restaurant.rate%]
+				                <span class="ui-icon ui-icon-star" style="float: left"></span>
+				                    [%i = i+1%]
+				                [%END%]
+                        </td>
+				    </tr>
+				    [%END%]
+				</table> 
+        </td>
+        <td>
+            Shopping
+            <table border="1">
+                <tr>
+                    <td></td>
+                   
+                </tr>
+                <tr>
+                    <td></td>
+                    
+                </tr>
+                </table> 
+
+        </td>
+    </tr>
+    <tr>
+	    <td>
+	        Nightlife
+	        
+	        <table border="1">
+                <tr>
+                    <td></td>
+                   
+                </tr>
+                <tr>
+                    <td></td>
+                    
+                </tr>
+                </table> 
+	        
+	    </td>
+	    <td>
+	        Hotel
+	        
+	        
+	        <table border="1">
+                <tr>
+                    <td></td>
+                   
+                </tr>
+                <tr>
+                    <td></td>
+                    
+                </tr>
+                </table> 
+	        
+	        
+	    </td>
+    </tr>
+</table> 
+
