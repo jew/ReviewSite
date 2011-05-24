@@ -71,7 +71,7 @@ __PACKAGE__->add_columns(
   "email",
   { data_type => "varchar", is_nullable => 1 },
 );
-__PACKAGE__->set_primary_key("user_id");
+__PACKAGE__->set_primary_key( "user_id" );
 #set relationship later
 __PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.user_id"=>"self.user_id"},

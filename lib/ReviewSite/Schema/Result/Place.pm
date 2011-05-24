@@ -71,6 +71,8 @@ __PACKAGE__->add_columns(
   #from Type
    "type_id",
   { data_type => "integer", is_nullable => 0 },
+   "avg_rate",
+  { data_type => "double", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("place_id");
 #set relationship later
@@ -84,11 +86,22 @@ __PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
 =cut
+
+=head2
+=cut
+
 #error
 sub rate {
 	my ( $self ) = @_;
-		return $self->review->get_column('rate')->sum()/$self->review->count();
+	return 0 if $self->review->count() == 0;
+	return $self->review->get_column('rate')->sum()/$self->review->count();
 }
+
+
+
+
+
+
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-05-09 15:08:42
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g
 
