@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var map;
+function initialize() {
+  var myLatlng = new google.maps.LatLng(13.820688,100.664889);
+  var myOptions = {
+    zoom: 12,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  
+  //google.maps.event.addListener(map, 'click', function(event) {
+   // placeMarker(event.latLng);
+  //  alert(event.latLng);
+    
+ // });
+}
+  
+function placeMarker(location) {
+  var clickedLocation = new google.maps.LatLng(location);
+  var marker = new google.maps.Marker({
+      position: location, 
+      map: map
+  });
+
+  map.setCenter(location);
+}
+$(document).ready(function(){
+    initialize();
+    var input = $("body input[name='latLng']"),
+    input_lat = $("body input[name='lat']"),
+    input_lng = $("body input[name='lng']");
+    
+    var get_position = new google.maps.LatLng();
+    google.maps.event.addListener(map, 'click', function(event) {
+        get_position = event.latLng;
+        var get_lat = get_position.lat(),
+        get_lng = get_position.lng();
+        placeMarker(event.latLng);
+        //alert(event.latLng);
+        //input.val(event.latLng);
+        input_lat.val(get_position.lat());
+        input_lng.val(get_lng);
+        //alert(get_lat);
+        //alert(get_lng);
+    });
+    var la = [%-place.la-%];
+    //alert(la);
+    var llong = [%-place.long -%];
+    var myLatlng = new google.maps.LatLng(la,llong);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        title:"[%place.placename%]"
+    });
+    
+    // To add the marker to the map, call setMap();
+    marker.setMap(map); 
+    
+});
+</script>
+</head>
+<body>
+
+    <table border="0" style=" margin-top: 20px;">
+        <tr>
+            <td>Business Name : [%review.placename%]</td>
+            <td>Location : [%review.location%]</td>
+            <td>Rate:[% place.rate %]</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table> 
+    [%WHILE (review=review_rs.next)%]
+    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
+    <table border="0" style=" margin-top: 20px;">
+        <tr>
+            <td>
+                <label> 
+                    Rate :
+                </label>
+                <div>
+                [%i =0;%]
+                [%WHILE i < review.rate%]
+                <span class="ui-icon ui-icon-star" style="float: left"></span>
+                    [%i = i+1%]
+                [%END%]
+                </div>
+            </td>
+            <tr>
+            <td>
+                <label>
+                    Review:
+                </label>
+                    [%review.detail%]
+            </td>
+            </tr>
+            <td>
+                <label>
+                    By:
+                </label>
+                    [% review.user.firstname %]
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table> 
+   </div>
+    [%END%]
+
+    [%status_msg%]
+   
+</body>
+</html>

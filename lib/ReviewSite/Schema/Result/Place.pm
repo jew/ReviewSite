@@ -71,8 +71,7 @@ __PACKAGE__->add_columns(
   #from Type
    "type_id",
   { data_type => "integer", is_nullable => 0 },
-   "avg_rate",
-  { data_type => "double", is_nullable => 0 },
+
 );
 __PACKAGE__->set_primary_key("place_id");
 #set relationship later
@@ -90,7 +89,6 @@ __PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
 =head2
 =cut
 
-#error
 sub rate {
 	my ( $self ) = @_;
 	return 0 if $self->review->count() == 0;

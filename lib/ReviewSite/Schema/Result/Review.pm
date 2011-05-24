@@ -73,6 +73,15 @@ __PACKAGE__-> belongs_to( "place","ReviewSite::Schema::Result::Place",
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L3Wzq6T/3kXD155GIyJS+g
 
 
+=head2
+
+#my $countR =  $c->model( 'DB::Review' )->search_rs( { place_id => 5},{ count => 'review_id'} ); 
+sub count {
+    my ( $self ) = @_;
+    return 0 if $self->review->count() == 0;
+    return $self->review->count();
+}
+=cut
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;

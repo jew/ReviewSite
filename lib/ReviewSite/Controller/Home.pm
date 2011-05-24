@@ -26,10 +26,10 @@ sub index :Path :Args(0) {
     $c->stash( title => 'Home' );
     
     #FIXME: How to autoupdate avg_rate field?
-    my $places = $c->model( 'DB::Place' )->search_rs({});
-    while (my $place = $places->next) { 
-    	$place->update({'avg_rate' => $place->rate}); 
-    }
+   # my $places = $c->model( 'DB::Place' )->search_rs({});
+    #while (my $place = $places->next) { 
+    	#$place->update({'avg_rate' => $place->rate}); 
+    #}
     #####
     my $hotel_rs    = $c->model( 'DB::Place' )->search_rs( { type_id => '1' } );
     my $restaurants = $c->model( 'DB::Place' )->top3();

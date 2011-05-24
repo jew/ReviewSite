@@ -6,23 +6,23 @@ Best of our reviews
         <td>
             Restaurants
 				<table border="0" >
-				    [%WHILE (restaurant = restaurants.next)%]
+				    [%#WHILE (restaurant = restaurants.next)%]
 				    <tr>
 				        <td>
 				        
 				            <div>
-				            [%restaurant.placename%]
+				            [%#restaurant.placename%]
 				            
 				            </div>
                             
-                            [%i =0;%]
-				                [%WHILE i < restaurant.rate%]
+                            [%#i =0;%]
+				                [%#WHILE i < restaurant.rate%]
 				                <span class="ui-icon ui-icon-star" style="float: left"></span>
-				                    [%i = i+1%]
-				                [%END%]
+				                    [%#i = i+1%]
+				                [%#END%]
                         </td>
 				    </tr>
-				    [%END%]
+				    [%#END%]
 				</table> 
         </td>
         <td>
