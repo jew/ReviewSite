@@ -48,7 +48,7 @@ body {
 	                [% ELSE %]
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/reviewsite/searchBusiness')%]">[Write a review]</a></li>
 	                <li class ="ui-state-default ui-corner-all">[Invite Friend]</li>
-	                <li class ="ui-state-default ui-corner-all">[Your Review]</li>
+	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/review/show')%]">[Your Review]<a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/logout')%]">[Sign Out]</a></li>
 	               [% END %]
                 </ul>
@@ -58,7 +58,7 @@ body {
                             <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="#">Restaurants</a></span></li>
                             <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="#">Hotel</a></li>
                             <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="#">Shopping</a></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="#">Nightlife</a></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/home/4/search">Nightlife</a></li>
                         </ul>
                     </div>
                  <div style="margin: 0 auto; width: 830px; background-color: #ffffff; border: 0px solid black; padding: 0 0 0 40px;">
