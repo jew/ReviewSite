@@ -55,10 +55,10 @@ body {
                 
                     <div>
                         <ul id="left_menu">
-                            <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="#">Restaurants</a></span></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="#">Hotel</a></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="#">Shopping</a></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/home/4/search">Nightlife</a></li>
+                            <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="/place/show?type_id=1">Restaurants</a></span></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=2">Hotel</a></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=3">Shopping</a></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=4">Nightlife</a></li>
                         </ul>
                     </div>
                  <div style="margin: 0 auto; width: 830px; background-color: #ffffff; border: 0px solid black; padding: 0 0 0 40px;">
