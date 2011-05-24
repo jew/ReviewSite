@@ -85,7 +85,8 @@ sub search :Local FormConfig{
     if ( $form->submitted_and_valid ) {
         my $types  = $form->param_value( 'types' );
         my $placename  = $form->param_value( 'businessname' );
-        my $result = $c->model( 'DB::Place' )->find( { placename => $placename ,id => $types } );
+        my $result = $c->model( 'DB::Place' )->find( { placename => $placename ,type_id => $types } );
+        #$c->log->debug("------------------->" . 13.835210539805606 );
         #$c->log->debug( Dumper( $result ) );
         if ( $result ) { 
             #show value to template
