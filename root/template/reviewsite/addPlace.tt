@@ -3,9 +3,12 @@
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<!--  <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />-->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
+$(function(){
+    $('<div id="map_google"></div>').appendTo('#map_canvas');
+});
 var map;
 function initialize() {
   var myLatlng = new google.maps.LatLng(13.820688,100.664889);
@@ -14,7 +17,7 @@ function initialize() {
     center: myLatlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  map = new google.maps.Map(document.getElementById("map_google"), myOptions);
   
   //google.maps.event.addListener(map, 'click', function(event) {
    // placeMarker(event.latLng);
@@ -29,7 +32,7 @@ function placeMarker(location) {
       position: location, 
       map: map
   });
-
+  
   map.setCenter(location);
 }
 $(document).ready(function(){
@@ -56,82 +59,9 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-[% CALL types_rs.reset %]
-<form method="post" action="/reviewsite/addPlace">
-<div style="border: 1px;">
-    <div>
-    <select name = "types">
-        [%- WHILE (type=types_rs.next)-%]
-            <option value="[%type.id%]">
-                [%type.placename%]
-            </option>
-        [%END%]
-    </select>
-    </div>
-    <table border="0">
-        <tr>
-            <td>
-                <div>
-                    <div>
-                        <label style="display: block; margin-top: 20px;">
-                            Latitude
-                        </label>
-                        <input style="clear:left; margin-right: 50px;" type="text" name="lat"  >
-                        <label style="display: block; margin-top: 20px;">
-                            Longtitude
-                        </label style="display: block; margin-top: 20px;"> 
-                        <input type="text" name="lng" >
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <label style="display: block; margin-top: 20px;">
-                        Name
-                    </label>
-                    <input type="text" name="placename">
-                    <label style="display: block; margin-top: 20px;">
-                        Location
-                    </label>    
-                    <input type="text" name="location">
-                </div>
-            </td>
-        </tr>
-        <tr>
-	        <td>
-	            <div>
-	                <label style="display: block; margin-top: 20px;">
-	                    Rate
-	                </label>
-	                <input type="text" name="rate">
-	            </div>
-	        </td>
-	        <td></td>
 
-        </tr>
-        <tr>
-            <td>
-                <div >
-                    <label style="display: block; margin-top: 20px;">
-                        Your review:
-                    </label>
-                    <textarea rows="5" cols="55" name="detail" style="vertical-align: top;"> </textarea> 
-                </div>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <tr><tr>
-            <td> 
-                <div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div>
-            </td>
-            <td>
-            </td>
-        </tr>
-    </table> 
-    <INPUT name ="submit" TYPE=SUBMIT>
-</form>
-</div>
+[%form.render%]
+
 [%status_msg%]
 </body>
 </html>

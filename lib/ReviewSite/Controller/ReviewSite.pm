@@ -22,10 +22,10 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained( '/' ) :PathPart( 'reviewSite' ) :CaptureArgs(1) {
+sub base :Chained( '/' ) :PathPart( 'reviewSite' ) :CaptureArgs( 1 ) {
     my( $self,$c,$place_id ) = @_;
     my $form = $c->stash-> { form };
-    $c->stash( place => $c->model( 'DB::Place' )->find($place_id) );
+    $c->stash( place => $c->model( 'DB::Place' )->find( $place_id ) );
 }
 
 =head2 searchBusiness
@@ -71,40 +71,49 @@ sub searchBusiness :Local :FormConfig {
 Use HTML::FormFu 
 =cut
 
-sub addPlace :Local {
+sub addPlace :Local :FormConfig {
 	my ( $self,$c ) = @_;
-	my $placename  = $c->request->param( 'placename' );
-	my $location   = $c->request->param( 'location' );
-	my $latitude   = $c->request->param( 'lat' );
-	my $longitude  = $c->request->param( 'lng' );
-	my $types      = $c->request->param( 'types' );
-	my $detail     = $c->request->param( 'detail' );
-    my $rate       = $c->request->param( 'rate' );
-    my $user_id    = $c->user->user_id;
+	my $form        = $c->stash->{ form };
+	my @type_objs   = $c->model( "DB::Type" )->all();
+    my @types;
     $c->stash( title => 'ADD NEW PALCE' );
-    #use Data::Dumper;
-    #$c->log->debug(Dumper($types));
-    my $list       = $c->model( 'DB::Type' );
-    $c->stash( types_rs => $list );
-	if( $c->req->method eq 'POST' ) {
-		my $place;
-        $place = $c->model( 'DB::Place' )->create( {
-			placename  => $placename,
-		    la         => $latitude,
-			long       => $longitude,
-			location   => $location,
-			type_id         => $types ,
-		} );
-		#insert into Review
-		my $place_id = $place->place_id();
-		$c->model( 'DB::Review' )->create( {
-			place_id =>  $place_id,
-			user_id  => $user_id ,
-			detail   => $detail,
-			rate     => $rate,
-		} );
-		$c->stash( status_msg => "complete!" );
-	}
+    foreach ( @type_objs ) {
+        push( @types, [$_->id, $_->placename ] );
+        # Get the select added by the config file
+    }
+    my $select = $form->get_all_element( { type => 'Select' } );
+    $select->options( \@types );
+
+    if ( $form->submitted_and_valid ) {
+        my $types      = $form->param_value( 'types' );
+		my $placename  = $form->param_value( 'placename' );
+		my $location   = $form->param_value( 'location' );
+		my $latitude   = $form->param_value( 'lat' );
+		my $longitude  = $form->param_value( 'lng' );
+		my $detail     = $form->param_value( 'detail' );
+	    my $rate       = $form->param_value( 'rate' );
+	    my $user_id    = $c->user->user_id;
+	    
+        if( $c->req->method eq 'POST' ) {
+	        my $place;
+	        $place = $c->model( 'DB::Place' )->create( {
+	            placename  => $placename,
+	            la         => $latitude,
+	            long       => $longitude,
+	            location   => $location,
+	            type_id    => $types ,
+	        } );
+	        #insert into Review
+	        my $place_id = $place->place_id();
+	        $c->model( 'DB::Review' )->create( {
+	            place_id =>  $place_id,
+	            user_id  => $user_id ,
+	            detail   => $detail,
+	            rate     => $rate,
+	        } );
+	        $c->stash( status_msg => "complete!" );
+        }
+    }
 }
 
 =head2 writeReview
@@ -114,7 +123,7 @@ sub writeReview :Chained( 'base' ) :PathPart( 'writeReview' ) :Args(0) :FormConf
     my ( $seldf,$c,$place_id ) = @_;
     my $form    = $c->stash-> { form };
     my $user_id = $c->user->user_id;
-    my $place = $c->stash->{ place };
+    my $place   = $c->stash->{ place };
     $c->stash( title         => 'Write a review' );
     $c->stash( placename     => $place->placename() );
     $c->stash( typeplacename => $place->type->placename() );
