@@ -1,0 +1,6 @@
+<div class ="ui-state-error ui corner-all" style="padding: 0 4px; margin-top: 100px;  margin: 6px ; width: 300px; text-align: center;">
+    <form action="" method="post">
+        Confirm to delete review.    
+        <input type="submit" value="Delete" />
+    </form>
+</div>

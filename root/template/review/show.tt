@@ -1,0 +1,38 @@
+[%WHILE (review = review_rs.next)%]
+[%review.place.placename%]
+</br>
+<div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
+    <table border="0" style=" margin-top: 20px;">
+        <tr>
+            <td>
+                <label> 
+                    Rate :
+                </label>
+                <div>
+                [%i =0;%]
+                [%WHILE i < review.rate%]
+                <span class="ui-icon ui-icon-star" style="float: left"></span>
+                    [%i = i+1%]
+                [%END%]
+                </div>
+            </td>
+            <tr>
+            <td>
+                <label>
+                    Review:
+                </label>
+                    [%review.detail%]
+            </td>
+            </tr>
+            <td>
+                <a href ="/review/[%review.review_id%]/delete"><span class="ui-icon ui-icon-circle-close" style="float: left"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table> 
+   </div>
+[%END%]
