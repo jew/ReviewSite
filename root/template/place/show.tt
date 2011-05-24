@@ -1,0 +1,26 @@
+<table border="0" width="600px;">
+    [%WHILE ( place = place_rs.next)%]
+    <tr>
+    
+	    <td>
+	        <a href = "/place/[%place.place_id%]/review">
+	           [%place.placename%]
+	        </a>
+	    </td>
+	    <td>
+	       <label>
+	           Rate:
+	       </label>
+	        [%place.rate%]
+	    </td>
+	    <td>
+        
+            
+        </td>
+    </tr>
+[%END%]
+</table> 
+
+
+
+
