@@ -2,73 +2,41 @@ Which Business Would You Like to Review?
 [%form.render%]
 [%IF value==1%]
 [% # Add a link to add a review %]
+[%WHILE (place=places.next)%]
     <table border="0" style=" margin-top: 20px;">
         <tr>
-            <td>Business Name : [%review.placename%]</td>
-            <td>Location : [%review.location%]</td>
-            <td>Map</td>
+            <td>Business Name : [%place.placename%]</td>
+            <td></td>
+            <td></td>
+        </tr>
+            <td>Location : [%place.location%]</td>
+            <td></td>
+        <tr>
+        
         </tr>
         <tr>
             <td>RATE: [% place.rate%]</td>
             <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-        </tr>
-    </table> 
-    
-    [%WHILE (review=review_rs.next)%]
-    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
-    <table border="0" style=" margin-top: 20px;">
-        <tr>
-            <td>
-                <label> 
-                    Rate :
-                </label>
-                <div>
-                [%i =0;%]
-                [%WHILE i < review.rate%]
-                <span class="ui-icon ui-icon-star" style="float: left"></span>
-                    [%i = i+1%]
-                [%END%]
-                </div>
-            </td>
-            <tr>
-            <td>
-                <label>
-                    Review:
-                </label>
-                    [%review.detail%]
-            </td>
-            </tr>
-            <td>
-                <label>
-                    By:
-                </label>
-                    [% review.user.firstname %]
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
+            <td><a href="/reviewSite/[%place.place_id%]/writeReview">write review</a></td>
             <td></td>
         </tr>
     </table> 
-   </div>
-    [%END%]
-    <a href="/reviewSite/[%place_id%]/writeReview">Write a review</a>
+[%END%]
+
+
 [%ELSE%]
 <td>
     [% # Add a link to add a review %]
     <a href="[%c.uri_for('/reviewsite/addPlace')%]">Dont have here !ADD</a>
     </td>
 [%IF x %]
-
 <td>
     [% # Add a link to add a review %]
     <a href="[%c.uri_for('/reviewsite/addPlace')%]">Dont have here !ADD</a>
     </td>
 [%END%]
 [%END%]
+
 

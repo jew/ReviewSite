@@ -33,41 +33,32 @@ Use HTML::FormFu
 =cut
 
 sub searchBusiness :Local :FormConfig {
-    my( $self,$c ) = @_;	
-    my $form = $c->stash->{ form };
-	my @type_objs = $c->model( "DB::Type" )->all();
-	my @types;
-	$c->stash( title => 'Write a review' );
-	#use Data::Dumper;
-	#$c->log->debug(Dumper(@type_objs));
-    foreach ( @type_objs ) {
-        push( @types, [$_->id, $_->placename ] );
-        # Get the select added by the config file
-    }
-    my $select = $form->get_all_element( { type => 'Select' } );
-    $select->options( \@types );
-    #$c->stash( x => 0);
+    my( $self,$c )  = @_;	
+    my $form        = $c->stash->{ form };
+    my $type        = $c->model( "DB::Type" );
+    my $select      = $form->get_all_element( { type => 'Select' } );
+    $select->options( $type->select() );
+    $c->stash( x     => 0);
+    $c->stash( title => 'Write a review' );
     if ( $form->submitted_and_valid ) {
-        my $types  = $form->param_value( 'types' );
-        my $bname  = $form->param_value( 'business_name' );
+        my $types    = $form->param_value( 'types' );
+        my $bname    = $form->param_value( 'business_name' );
+        my @keywords = split(/\s+/, $bname);
+        my @cond;
+        foreach my $keyword (@keywords) {
+            push(@cond, {'placename' => { 'like' => "%$keyword%" } } );	
+        }
         my $result = $c->model( 'DB::Place' )->search( {
-        	 type_id => $types,
-        	 placename => { 'like', '%' . $bname . '%' }
-        
+            type_id => $types,
+            -and => \@cond,
         } );
-        $c->log->debug("------------->" .$result );
         if ( $result ) { 
-            #show value to template
-            #my $review_rs = $c->model( 'DB::Review' )->search({ place_id => $result->place_id()  });
-            #my $review_rs = $result->review;
-           # $c->stash(value => 1 , review_rs => $review_rs ,review => $result ,place_id => $result->place_id() ,place => $result);
            $c->stash( value => 1, places => $result );
         } else {
         	#no value ADD new
             $c->stash( value => 2 );     
         }
-   }
-	
+   }	
 }
 
 =head2 addPlace
@@ -137,7 +128,6 @@ sub writeReview :Chained( 'base' ) :PathPart( 'writeReview' ) :Args(0) :FormConf
         $c->stash( status_msg => "complete!" );
     } 
 }
-
 
 =head1 AUTHOR
 
