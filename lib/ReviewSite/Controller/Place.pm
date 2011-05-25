@@ -55,14 +55,13 @@ sub show :Local {
 SAND-136 
 Make a controller action that fetches all places of a given type 
 =cut
+
 sub review :Chained( 'base' ) :Args( 0 ) {
 	my ( $self,$c ) = @_;
 	my $place_id    = $c->stash->{ place_id };
-	my $review_rs   = $c->model( 'DB::Review' )->search( { place_id => $place_id } );
 	my $result      = $c->model( 'DB::Place' )->find( { place_id => $place_id } );
-	$c->stash( review_rs => $review_rs , place => $result ); 
-	$c->stash( title     => 'Reviews' );
-	
+	$c->stash( place => $result ); 
+	$c->stash( title     => 'Reviews' );	
 }
 
 

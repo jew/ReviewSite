@@ -67,11 +67,10 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
     <table border="0" style=" margin-top: 20px;">
         <tr>
-            <td>Business Name : [%review.placename%]</td>
-            <td>Location : [%review.location%]</td>
+            <td>Business Name : [%place.placename%]</td>
+            <td>Location : [%place.location%]</td>
             <td>Rate:[% place.rate %]</td>
         </tr>
         <tr>
@@ -83,7 +82,7 @@ $(document).ready(function(){
             <td></td>
         </tr>
     </table> 
-    [%WHILE (review=review_rs.next)%]
+    [%FOREACH review IN place.review%]
     <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
     <table border="0" style=" margin-top: 20px;">
         <tr>
