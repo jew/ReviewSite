@@ -6,10 +6,12 @@ use base 'DBIx::Class::ResultSet';
 sub select {
 	my $self = shift;
 	my @type_objs = $self->all();
-    return \@type_objs;
-
+	my @types;
+    foreach ( @type_objs ) {
+        push( @types, [$_->id, $_->placename ] );
+        # Get the select added by the config file
+    }
+    return \@types;
 }
-
-
 
 1;

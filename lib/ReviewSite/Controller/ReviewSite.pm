@@ -35,16 +35,18 @@ Use HTML::FormFu
 sub searchBusiness :Local :FormConfig {
     my( $self,$c ) = @_;	
     my $form = $c->stash->{ form };
-	my $type = $c->model( "DB::Type" );
+	my @type_objs = $c->model( "DB::Type" )->all();
 	my @types;
-    foreach ( $type.select() ) {
+	$c->stash( title => 'Write a review' );
+	#use Data::Dumper;
+	#$c->log->debug(Dumper(@type_objs));
+    foreach ( @type_objs ) {
         push( @types, [$_->id, $_->placename ] );
         # Get the select added by the config file
     }
     my $select = $form->get_all_element( { type => 'Select' } );
     $select->options( \@types );
     #$c->stash( x => 0);
-    $c->stash( title => 'Write a review' );
     if ( $form->submitted_and_valid ) {
         my $types  = $form->param_value( 'types' );
         my $bname  = $form->param_value( 'business_name' );
@@ -76,15 +78,9 @@ sub addPlace :Local :FormConfig {
 	my ( $self,$c ) = @_;
 	my $form        = $c->stash->{ form };
     $c->stash( title => 'ADD NEW PALCE' );
-    
-    my @type_objs   = $c->model( "DB::Type" )->all();
-    my @types;
-    foreach ( @type_objs ) {
-        push( @types, [$_->id, $_->placename ] );
-        # Get the select added by the config file
-    }
+    my $type   = $c->model( "DB::Type" );
     my $select = $form->get_all_element( { type => 'Select' } );
-    $select->options( \@types );
+    $select->options( $type->select() );   
 
     if ( $form->submitted_and_valid ) {
         my $types      = $form->param_value( 'types' );
