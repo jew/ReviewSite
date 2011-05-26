@@ -26,6 +26,7 @@ $mech->field( 'rating','1' );
 $mech->field( 'user_id','1' );
 $mech->submit_form_ok();
 $mech->content_contains( "complete!" );
+
 =head
 #test sub delete 
 $mech -> get_ok( "http://localhost:3000/review/71/delete" );
@@ -34,5 +35,19 @@ $mech->content_like( qr/Confirm to delete review./ );
 $mech->submit_form_ok();
 $mech->title_is( "Your Reviews","check redirect" );
 =cut
+
+#test edit. Chang BB to BBQ
+$mech->get('http://localhost:3000/review/10/edit');
+$mech->title_is( "Edit Your Reviews" );
+$mech->content_contains( "Name" );
+$mech->content_contains( "Location" );
+$mech->content_contains( "Latitude" );
+$mech->content_contains( "Longtitude" );
+$mech->content_contains( "Rating" );
+$mech->content_contains( "Your Review" );
+$mech->field( 'placename','BBQ' );
+$mech->submit_form_ok();
+$mech->content_contains( "BBQ" );
+
 done_testing();
 

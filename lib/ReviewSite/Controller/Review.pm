@@ -2,7 +2,8 @@ package ReviewSite::Controller::Review;
 use Moose;
 use namespace::autoclean;
 
-BEGIN {extends 'Catalyst::Controller'; }
+#BEGIN {extends 'Catalyst::Controller'; }
+BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
 =head1 NAME
 
@@ -22,6 +23,7 @@ Catalyst Controller.
 sub base :Chained( '/' ) :PathPart( 'review' ) :CaptureArgs( 1 ) {
     my ( $self , $c, $review_id ) = @_;
     $c->stash( review_id => $review_id );
+
 
 }
 
@@ -44,7 +46,7 @@ sub delete :Chained( 'base' ) :Args( 0 ) {
 }
 
 
-=head show
+=head2 show
 =cut 
 
 sub show :Local  {
@@ -58,7 +60,29 @@ sub show :Local  {
     $c->stash( review_rs => $review_rs );
 
 }	
-	
+
+
+=head2 edit
+edit user s review by FormFu
+=cut
+
+sub edit :Chained( 'base' ) :FormConfig {
+    my ( $self,$c ) = @_ ;
+    my $form        = $c->stash->{ form };
+    my $review_id   = $c->stash->{ review_id };
+    my $review      = $c->model('DB::Review' )->find( $review_id );
+    $c->stash( review => $review );
+    $c->stash( title => "Edit Your Reviews" );
+    if ( $form->submitted_and_valid ) {
+            $form->model->update( $review );
+            $form->model->update( $review->place );
+            $c->res->redirect( $c->uri_for( "/review/show" ) );
+            return;
+        }
+        $form->model->default_values( $review )
+            if ! $form->submitted;
+
+}	
 	
 =head1 AUTHOR
 

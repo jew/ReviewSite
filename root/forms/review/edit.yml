@@ -1,0 +1,54 @@
+---
+action: 
+auto_fieldset: 1
+
+elements:
+      - type: Block
+        nested_name: place
+        elements:
+          - type: Text
+            name: placename
+            label: Name
+
+          - type: Text
+            name: location
+            label: Location
+            
+          - type: Text
+            name: la
+            label: Latitude
+            
+          - type: Text
+            name: long
+            label: Longtitude
+
+
+        # Another text field for the numeric rating
+      - type: Text
+        name: rate
+        label: Rating
+        attributes:
+            title: Enter a rating between 1 and 5 here
+        constraints:
+        # Make sure it's a number
+          - type: Integer
+            message: "Required. Digits only, please."
+        # Check the min & max values
+          - type: Range
+            min: 1
+            max: 5
+            message: "Must be between 1 and 5."
+          
+      - type: Textarea
+        name: detail
+        label: Your Review
+        
+      - type: Block
+        id: map_canvas
+       
+      - type: Submit
+        name: submit
+        value: Submit
+      
+constraints:
+      - SingleValue
