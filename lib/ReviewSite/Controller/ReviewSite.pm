@@ -22,7 +22,7 @@ Catalyst Controller.
 
 =cut
 
-sub base :Chained( '/' ) :PathPart( 'reviewSite' ) :CaptureArgs( 3 ) {
+sub base :Chained( '/' ) :PathPart( 'reviewSite' ) :CaptureArgs( 1 ) {
     my( $self,$c,$place_id, ) = @_;
     my $form = $c->stash-> { form };
     $c->stash( place => $c->model( 'DB::Place' )->find( $place_id ) );
@@ -43,20 +43,21 @@ sub searchBusiness :Local :FormConfig {
     if ( $form->submitted_and_valid ) {
         my $types    = $form->param_value( 'types' );
         my $bname    = $form->param_value( 'business_name' );
-        my @keywords = split(/\s+/, $bname);
+        my @keywords = split( /\s+/, $bname );
         my @cond;
-        foreach my $keyword (@keywords) {
+        foreach my $keyword ( @keywords ) {
             push(@cond, {'placename' => { 'like' => "%$keyword%" } } );	
         }
+        #$c->log->debug("------------>id" . $types);
         my $result = $c->model( 'DB::Place' )->search( {
             type_id => $types,
             -and => \@cond,
         } );
-        if ( $result ) { 
+        if ( $result !=0 ) { 
            $c->stash( value => 1, places => $result );
         } else {
         	#no value ADD new
-            $c->stash( value => 2 );     
+            $c->stash( value => 0 );     
         }
    }	
 }

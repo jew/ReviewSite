@@ -17,16 +17,41 @@ $mech->submit_form_ok() ;
 $mech->get_ok( 'http://localhost:3000/reviewsite/searchBusiness' );
 $mech->title_is( "Write a review" );
 $mech->field( 'businesstype' , '1' );
-$mech->field( 'name' , 'Sukumwit Suite ' );
+$mech->field( 'business_name' , 'Banglux' );
 $mech->submit_form_ok();
 $mech->content_contains( "Dont have here !ADD" );
+
+
+#test sub searchbusiness
+$mech->get_ok( 'http://localhost:3000/reviewsite/searchBusiness' );
+$mech->title_is( "Write a review" );
+$mech->field( 'types' , '1' );
+$mech->field( 'business_name' , 'b' );
+$mech->submit_form_ok();
+$mech->title_is( "Write a review" );
+#diag(Data::Dump::dump($mech->{res}->{'_content'}));
+$mech->content_contains( 'BB' );
+$mech->content_contains( "Amari Boulevard" );
+$mech->content_contains( "write a review" );
+
+#test sub searchbusiness
+$mech->get_ok( 'http://localhost:3000/reviewsite/searchBusiness' );
+$mech->title_is( "Write a review" );
+$mech->field( 'types' , '4' );
+$mech->field( 'business_name' , 'wan  b' );
+$mech->submit_form_ok();
+$mech->content_contains( "Kwan-Imm B" );
+$mech->content_contains( "write a review" );
+
+
+
 #get the place that user want 
 $mech->get_ok( 'http://localhost:3000/reviewsite/searchBusiness' );
 $mech->title_is( "Write a review" );
-$mech->field( 'businesstype' , '1' );
-$mech->field( 'name' , 'BB ' );
+$mech->field( 'types' , '1' );
+$mech->field( 'business_name' , 'BB ' );
 $mech->submit_form_ok();
-$mech->content_contains( "Write a review" );
+$mech->content_contains( "write a review" );
   
 #Test Sub add AddPlace
 $mech->get_ok( 'http://localhost:3000/reviewsite/addPlace' );

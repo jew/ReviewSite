@@ -19,7 +19,7 @@ Which Business Would You Like to Review?
             <td></td>
         </tr>
         <tr>
-            <td><a href="/reviewSite/[%place.place_id%]/writeReview">write review</a></td>
+            <td><a href="/reviewSite/[%place.place_id%]/writeReview">write a review</a></td>
             <td></td>
         </tr>
     </table> 
