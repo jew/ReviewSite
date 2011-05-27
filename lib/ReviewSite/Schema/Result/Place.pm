@@ -95,7 +95,14 @@ sub rate {
 	return $self->review->get_column('rate')->sum()/$self->review->count();
 }
 
+=head2 count
+=cut
 
+sub count {
+    my ( $self ) = @_;
+    return 0 if $self->review->count() == 0;
+    return $self->review->count();
+}
 
 
 

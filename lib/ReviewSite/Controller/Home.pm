@@ -24,38 +24,15 @@ Catalyst Controller.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( title => 'Home' );
-    
-    #FIXME: How to autoupdate avg_rate field?
-   # my $places = $c->model( 'DB::Place' )->search_rs({});
-    #while (my $place = $places->next) { 
-    	#$place->update({'avg_rate' => $place->rate}); 
-    #}
-    #####
-    my $hotel_rs    = $c->model( 'DB::Place' )->search_rs( { type_id => '1' } );
-    my $restaurants = $c->model( 'DB::Place' )->top3();
-    $c->stash( hotels => $hotel_rs );
+    my $hotels      = $c->model( 'DB::Place' )->search_rs( { type_id => '1' } )->top3();
+    my $nightlifes  = $c->model( 'DB::Place' )->search_rs( { type_id => '2' } )->top3();
+    my $shoppings   = $c->model( 'DB::Place' )->search_rs( { type_id => '3' } )->top3();
+    my $restaurants = $c->model( 'DB::Place' )->search_rs( { type_id => '4' } )->top3();
+    $c->stash( hotels      => $hotels );
+    $c->stash( nightlifes  => $nightlifes );
+    $c->stash( shoppings   => $shoppings );
     $c->stash( restaurants => $restaurants );
 }
-
-=head2 base
-
-sub base :Chained( '/' ) :PathPart( 'home' ) :CaptureArgs( 1 ) {
-	my ( $self,$c ) = @_;
-	my $place = $c->model( 'DB::Place' );
-	
-	my $hotel_rs = $c->$place->search_rs( {type_id => '1' } );
-	$c->stash( hotels => $hotel_rs );
-	
-	
-	
-	
-}
-=cut
-	
-	
-
-
-
 
 
 
