@@ -41,7 +41,7 @@ body {
             <div id = "main" class ="clearfix">
                 <ul id="top_menu">
                     <li class ="ui-state-default ui-corner-all" ><a href="[% c.uri_for('/home') %]">[Home]</a></li>
-	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/user/search')%]">[Find review]</a></li>
+                    <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/reviewsite/searchBusiness')%]">[Find review]</a></li>
 	                [% IF !c.user_exists %]
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/user/register')%]">[Register]</a></li>
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/login')%]">[Sign in]</a></li>
