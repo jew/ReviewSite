@@ -38,7 +38,6 @@ sub searchBusiness :Local :FormConfig {
     my $type        = $c->model( "DB::Type" );
     my $select      = $form->get_all_element( { type => 'Select' } );
     $select->options( $type->select() );
-    $c->stash( x     => 0);
     $c->stash( title => 'Write a review' );
     if ( $form->submitted_and_valid ) {
         my $types    = $form->param_value( 'types' );
@@ -67,11 +66,11 @@ Use HTML::FormFu
 =cut
 
 sub addPlace :Local :FormConfig {
-	my ( $self,$c ) = @_;
-	my $form        = $c->stash->{ form };
+	my ( $self,$c )  = @_;
+	my $form         = $c->stash->{ form };
+    my $type         = $c->model( "DB::Type" );
+    my $select       = $form->get_all_element( { type => 'Select' } );
     $c->stash( title => 'ADD NEW PALCE' );
-    my $type   = $c->model( "DB::Type" );
-    my $select = $form->get_all_element( { type => 'Select' } );
     $select->options( $type->select() );   
 
     if ( $form->submitted_and_valid ) {
