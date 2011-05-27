@@ -7,11 +7,15 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 var map;
+var la = [%-place.la-%];
+var llong = [%-place.long -%];
+var centermyLatlng = new google.maps.LatLng(la,llong);
+
 function initialize() {
   var myLatlng = new google.maps.LatLng(13.820688,100.664889);
   var myOptions = {
-    zoom: 12,
-    center: myLatlng,
+    zoom: 16,
+    center: centermyLatlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -39,18 +43,18 @@ $(document).ready(function(){
     input_lng = $("body input[name='lng']");
     
     var get_position = new google.maps.LatLng();
-    google.maps.event.addListener(map, 'click', function(event) {
-        get_position = event.latLng;
-        var get_lat = get_position.lat(),
-        get_lng = get_position.lng();
-        placeMarker(event.latLng);
+    //google.maps.event.addListener(map, 'click', function(event) {
+        //get_position = event.latLng;
+      //  var get_lat = get_position.lat(),
+       // get_lng = get_position.lng();
+        //placeMarker(event.latLng);
         //alert(event.latLng);
         //input.val(event.latLng);
-        input_lat.val(get_position.lat());
-        input_lng.val(get_lng);
+       // input_lat.val(get_position.lat());
+       // input_lng.val(get_lng);
         //alert(get_lat);
         //alert(get_lng);
-    });
+   // });
     var la = [%-place.la-%];
     //alert(la);
     var llong = [%-place.long -%];
@@ -66,28 +70,48 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body id="redmond themeroller">
+<div style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond  ui-widget-content ui-corner-all">
+   <div >
+    <div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div>
+   </div>
     <table border="0" style=" margin-top: 20px;">
         <tr>
-            <td>Business Name : [%place.placename%]</td>
-            <td>Location : [%place.location%]</td>
-            <td>Rate:[% place.rate %]</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td></td>
-            <td><div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div></td>
+            <td>
+            </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>
+                <label style ="font-size: 15px; color: #222222";>
+                    Business Name : [%place.placename%]
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style ="font-size: 15px; color: #222222";>
+                    Location : [%place.location%]
+                </label>
+            </td>
+        </tr>
+            <td>
+                <label style ="font-size: 15px; color: #222222";>
+                    Rate:[% place.rate %]
+                </label>
+            </td>
         </tr>
     </table> 
     [%FOREACH review IN place.review%]
-    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
-    <table border="0" style=" margin-top: 20px;">
+    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;" class = "redmond ui-widget-content ui-corner-all" >
+    <table border="0" style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond ui-accordion-content ui-helper-reset  ui-accordion-content-active">
         <tr>
             <td>
-                <label> 
+                <label>
                     Rate :
                 </label>
                 <div>
@@ -99,17 +123,18 @@ $(document).ready(function(){
                 </div>
             </td>
             <tr>
-            <td>
+            <td >
                 <label>
                     Review:
                 </label>
+                <label>
                     [%review.detail%]
+                </label>
             </td>
             </tr>
             <td>
                 <label>
                     By:
-                </label>
                     [% review.user.firstname %]
             </td>
         </tr>
@@ -121,8 +146,6 @@ $(document).ready(function(){
     </table> 
    </div>
     [%END%]
-
-    [%status_msg%]
-   
+</div>   
 </body>
 </html>
