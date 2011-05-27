@@ -65,42 +65,6 @@ sub check :Local {
 	}
 }
 
-
-=head2 search
-
-
-
-sub search :Local FormConfig{
-	my ( $self,$c ) = @_;
-	my $form = $c-> stash-> { form };
-	my @type_objs = $c->model( "DB::Type" )->all();
-    my @types;
-    $c->stash( title => 'Search Review' );
-    foreach ( @type_objs ) {
-        push( @types, [ $_->id, $_->placename ] );
-        # Get the select added by the config file
-    }
-    my $select = $form->get_all_element( { type => 'Select' } );
-    $select->options( \@types );
-    if ( $form->submitted_and_valid ) {
-        my $types  = $form->param_value( 'types' );
-        my $placename  = $form->param_value( 'businessname' );
-        my $result = $c->model( 'DB::Place' )->find( { placename => $placename ,type_id => $types } );
-        if ( $result ) { 
-            #show value to template
-            my $review_rs = $c->model( 'DB::Review' )->search({ place_id => $result->place_id()  });
-            $c->stash(value => 1, review => $result ,place => $result );
-            #die(Data::Dump::dump($review_rs));
-            $c->stash( review_rs => $review_rs );          
-        } else {
-            #no value ADD new
-            $c->stash( value => 0 , status_msg => 'No Review' );
-        }
-    }
-}
-=cut
-
-
 =head2 search
 =cut
 
