@@ -27,13 +27,13 @@ elements:
         
       - type: Text
         name: lat
-        label: Location
+        label: Latitude
         constraints: 
         - type: Required
         
       - type: Text
         name: lng
-        label: Location
+        label: Longtitude
         constraints: 
         - type: Required
 
