@@ -39,15 +39,12 @@ $mech->title_is( "Your Reviews","check redirect" );
 #test edit. Chang BB to BBQ
 $mech->get('http://localhost:3000/review/10/edit');
 $mech->title_is( "Edit Your Reviews" );
-$mech->content_contains( "Name" );
-$mech->content_contains( "Location" );
-$mech->content_contains( "Latitude" );
-$mech->content_contains( "Longtitude" );
+$mech->content_contains( "Place" );
 $mech->content_contains( "Rating" );
 $mech->content_contains( "Your Review" );
-$mech->field( 'placename','BBQ' );
+$mech->field( 'place_id','CC' );
 $mech->submit_form_ok();
-$mech->content_contains( "BBQ" );
+$mech->content_contains( "CC" );
 
 done_testing();
 

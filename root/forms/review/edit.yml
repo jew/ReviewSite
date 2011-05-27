@@ -3,25 +3,11 @@ action:
 auto_fieldset: 1
 
 elements:
-      - type: Block
-        nested_name: place
-        elements:
-          - type: Text
-            name: placename
-            label: Name
-
-          - type: Text
-            name: location
-            label: Location
-            
-          - type: Text
-            name: la
-            label: Latitude
-            
-          - type: Text
-            name: long
-            label: Longtitude
-
+      - type: Select
+        name: place_id
+        label: Place
+        model_config:
+          resultset: Place
 
         # Another text field for the numeric rating
       - type: Text

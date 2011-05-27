@@ -72,15 +72,14 @@ sub edit :Chained( 'base' ) :FormConfig {
     my $review_id   = $c->stash->{ review_id };
     my $review      = $c->model('DB::Review' )->find( $review_id );
     $c->stash( review => $review );
-    $c->stash( title => "Edit Your Reviews" );
+    $c->stash( title  => "Edit Your Reviews" );
     if ( $form->submitted_and_valid ) {
             $form->model->update( $review );
-            $form->model->update( $review->place );
             $c->res->redirect( $c->uri_for( "/review/show" ) );
             return;
         }
         $form->model->default_values( $review )
-            if ! $form->submitted;
+            if (! $form->submitted && $review);
 
 }	
 	
