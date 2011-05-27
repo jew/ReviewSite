@@ -7,11 +7,14 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 var map;
+var la = [%-place.la-%];
+var llong = [%-place.long -%];
+var centermyLatlng = new google.maps.LatLng(la,llong);
 function initialize() {
   var myLatlng = new google.maps.LatLng(13.820688,100.664889);
   var myOptions = {
-    zoom: 12,
-    center: myLatlng,
+    zoom: 16,
+    center: centermyLatlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -68,12 +71,13 @@ $(document).ready(function(){
 </head>
 <body>
 [%form.render%]
-[%IF value==1%]
-    <table border="0" style=" margin-top: 20px;">
+
+<div style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond  ui-widget-content ui-corner-all ui-accordion-content ui-helper-reset  ui-accordion-content-active">
+    <table border="0" style=" margin-top: 20px;" >
         <tr>
-            <td>Business Name : [%review.placename%]</td>
-            <td>Location : [%review.location%]</td>
-            <td>RATE:[% place.rate %]</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td></td>
@@ -83,8 +87,23 @@ $(document).ready(function(){
             <td></td>
             <td></td>
         </tr>
+        <tr>
+            <td>
+                Business Name : [%place.placename%]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Location : [%place.location%]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                RATE:[% place.rate %]
+            </td>
+        </tr>
     </table> 
-    [%WHILE (review=review_rs.next)%]
+    [%FOREACH review IN place.review%]
     <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
     <table border="0" style=" margin-top: 20px;">
         <tr>
@@ -123,8 +142,7 @@ $(document).ready(function(){
     </table> 
    </div>
     [%END%]
-[%ELSE%]
-    [%status_msg%]
-[%END%]    
+
+</div>   
 </body>
 </html>

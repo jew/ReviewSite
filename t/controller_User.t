@@ -8,7 +8,7 @@ ok( my $mech = Test::WWW::Mechanize::Catalyst-> new );
 #test for register 
 $mech->get_ok( 'http://localhost:3000/user/register' );
 $mech->title_is( "Register" );
-$mech->field( 'username' , 'lalit' );
+$mech->field( 'username' , 'testuserlalit' );
 $mech->field( 'password', '1234' );
 $mech->field( 'repeat_pass','1234' );
 $mech->field( 'firstname','lalit' );
@@ -41,24 +41,19 @@ $mech->content_contains( '0' ,'Not Available username');
 #Available
 $mech->get_ok( 'http://localhost:3000/user/check/?username=mm' );
 $mech->content_contains( '1','Available username' );
-diag($mech->content);
+diag($mech->content );
 
 #test searching review
 #found
-$mech->get_ok( 'http://localhost:3000/user/search' );
+$mech->get_ok( 'http://localhost:3000/user/search?place_id=5' );
 $mech->title_is( "Search Review" );
-$mech->field( 'placename',"BB" );
-$mech->field( 'types',"1" );
-$mech->submit_form_ok();
-$mech->content_contains( "Business Name" );
+$mech->content_contains( 'Business Name');
+$mech->content_contains( 'Location' );
+$mech->content_contains( 'Review' );
+$mech->content_contains( 'By:' );
 
 
-#not found
-$mech->get_ok( 'http://localhost:3000/user/search' );
-$mech->title_is( "Search Review" );
-$mech->field( 'placename',"ABC" );
-$mech->field( 'types',"1" );
-$mech->submit_form_ok();
-$mech->content_contains( "No Review" );
+
+
 
 done_testing();

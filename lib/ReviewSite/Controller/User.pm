@@ -68,7 +68,7 @@ sub check :Local {
 
 =head2 search
 
-=cut
+
 
 sub search :Local FormConfig{
 	my ( $self,$c ) = @_;
@@ -86,12 +86,11 @@ sub search :Local FormConfig{
         my $types  = $form->param_value( 'types' );
         my $placename  = $form->param_value( 'businessname' );
         my $result = $c->model( 'DB::Place' )->find( { placename => $placename ,type_id => $types } );
-        #$c->log->debug("------------------->" . 13.835210539805606 );
-        #$c->log->debug( Dumper( $result ) );
         if ( $result ) { 
             #show value to template
             my $review_rs = $c->model( 'DB::Review' )->search({ place_id => $result->place_id()  });
             $c->stash(value => 1, review => $result ,place => $result );
+            #die(Data::Dump::dump($review_rs));
             $c->stash( review_rs => $review_rs );          
         } else {
             #no value ADD new
@@ -99,6 +98,24 @@ sub search :Local FormConfig{
         }
     }
 }
+=cut
+
+
+=head2 search
+=cut
+
+
+sub search :Local {
+    my ( $self,$c ) = @_;
+    my $place_id  = $c->request->param( 'place_id' );
+    $c->log->debug("-------------".$place_id);
+    my $result = $c->model( 'DB::Place' )->find( { place_id => $place_id} );
+    $c->stash( place => $result );
+    $c->stash( title => 'Search Review' );
+
+}
+
+
 
 
 
