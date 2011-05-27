@@ -3,12 +3,11 @@ action:
 auto_fieldset: 1
 
 elements:
-        
       - type: Select
         name: types
-        label: Place
-        constraints: 
-        - type: Required
+        label: Categories
+        model_config:
+          resultset: Type
         
       - type: Text
         name: placename

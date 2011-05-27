@@ -6,9 +6,11 @@ elements:
         
       - type: Select
         name: types
-        label: Place
+        label: Categories
         multiple: 1
         size: 4
+        model_config:
+          resultset: Type
         
       - type: Text
         name: business_name

@@ -35,9 +35,6 @@ Use HTML::FormFu
 sub searchBusiness :Local :FormConfig {
     my( $self,$c )  = @_;	
     my $form        = $c->stash->{ form };
-    my $type        = $c->model( "DB::Type" );
-    my $select      = $form->get_all_element( { type => 'Select' } );
-    $select->options( $type->select() );
     $c->stash( title => 'Write a review' );
     if ( $form->submitted_and_valid ) {
         my $types    = $form->param_value( 'types' );
@@ -45,15 +42,14 @@ sub searchBusiness :Local :FormConfig {
         my @keywords = split( /\s+/, $bname );
         my @cond;
         foreach my $keyword ( @keywords ) {
-            push(@cond, {'placename' => { 'like' => "%$keyword%" } } );	
+            push( @cond, { 'placename' => { 'like' => "%$keyword%" } } );	
         }
-        #$c->log->debug("------------>id" . $types);
-        my $result = $c->model( 'DB::Place' )->search( {
+        my $result  =  $c->model( 'DB::Place' )->search( {
             type_id => $types,
-            -and => \@cond,
+            -and    => \@cond,
         } );
         if ( $result !=0 ) { 
-           $c->stash( value => 1, places => $result );
+            $c->stash( value => 1, places => $result );
         } else {
         	#no value ADD new
             $c->stash( value => 0 );     
@@ -68,11 +64,7 @@ Use HTML::FormFu
 sub addPlace :Local :FormConfig {
 	my ( $self,$c )  = @_;
 	my $form         = $c->stash->{ form };
-    my $type         = $c->model( "DB::Type" );
-    my $select       = $form->get_all_element( { type => 'Select' } );
-    $c->stash( title => 'ADD NEW PALCE' );
-    $select->options( $type->select() );   
-
+    $c->stash( title => 'ADD NEW PALCE' ); 
     if ( $form->submitted_and_valid ) {
         my $types      = $form->param_value( 'types' );
 		my $placename  = $form->param_value( 'placename' );
@@ -82,7 +74,6 @@ sub addPlace :Local :FormConfig {
 		my $detail     = $form->param_value( 'detail' );
 	    my $rate       = $form->param_value( 'rate' );
 	    my $user_id    = $c->user->user_id;
-	    
         if( $c->req->method eq 'POST' ) {
 	        my $place;
 	        $place = $c->model( 'DB::Place' )->create( {
@@ -95,7 +86,7 @@ sub addPlace :Local :FormConfig {
 	        #insert into Review
 	        my $place_id = $place->place_id();
 	        $c->model( 'DB::Review' )->create( {
-	            place_id =>  $place_id,
+	            place_id => $place_id,
 	            user_id  => $user_id ,
 	            detail   => $detail,
 	            rate     => $rate,
@@ -108,6 +99,7 @@ sub addPlace :Local :FormConfig {
 =head2 writeReview
 Use HTML::FormFu 
 =cut
+
 sub writeReview :Chained( 'base' ) :PathPart( 'writeReview' ) :Args(0) :FormConfig {
     my ( $seldf,$c,$place_id ) = @_;
     my $form    = $c->stash-> { form };
@@ -120,10 +112,10 @@ sub writeReview :Chained( 'base' ) :PathPart( 'writeReview' ) :Args(0) :FormConf
         my $detail  = $form->param_value( 'detail' );  
         my $rate    = $form->param_value( 'rating' );  	
     	my $result  = $c->model( 'DB::Review' )->create({
-    	   place_id => $place->place_id(),
-    	   user_id  => $user_id,
-    	   detail   => $detail,
-    	   rate     => $rate,	
+            place_id => $place->place_id(),
+            user_id  => $user_id,
+            detail   => $detail,
+            rate     => $rate,	
         } );
         $c->stash( status_msg => "complete!" );
     } 
