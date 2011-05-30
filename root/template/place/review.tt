@@ -19,12 +19,6 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  
-  //google.maps.event.addListener(map, 'click', function(event) {
-   // placeMarker(event.latLng);
-  //  alert(event.latLng);
-    
- // });
 }
   
 function placeMarker(location) {
@@ -43,20 +37,7 @@ $(document).ready(function(){
     input_lng = $("body input[name='lng']");
     
     var get_position = new google.maps.LatLng();
-    //google.maps.event.addListener(map, 'click', function(event) {
-        //get_position = event.latLng;
-      //  var get_lat = get_position.lat(),
-       // get_lng = get_position.lng();
-        //placeMarker(event.latLng);
-        //alert(event.latLng);
-        //input.val(event.latLng);
-       // input_lat.val(get_position.lat());
-       // input_lng.val(get_lng);
-        //alert(get_lat);
-        //alert(get_lng);
-   // });
     var la = [%-place.la-%];
-    //alert(la);
     var llong = [%-place.long -%];
     var myLatlng = new google.maps.LatLng(la,llong);
     var marker = new google.maps.Marker({
@@ -69,13 +50,39 @@ $(document).ready(function(){
     
 });
 </script>
+<style>
+#bodyframe{
+    margin-top: 20px; 
+    font-size: 12px; 
+    color: #222222;
+}
+#table{
+    margin-top: 20px;
+}
+#label_s{
+    font-size: 15px;
+    color: #222222";
+
+}
+#div_s{
+    width: 810px;
+    margin: 10pt auto;
+    border: 1px solid #3BB9FF;"
+}
+#map_canvas{
+    width: 400px; 
+    height: 300px; 
+    position: relative; 
+}
+</style>
+
 </head>
-<body id="redmond themeroller">
-<div style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond  ui-widget-content ui-corner-all">
+<body>
+<div id="bodyframe" class="redmond  ui-widget-content ui-corner-all">
    <div >
-    <div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div>
+    <div id="map_canvas" class="body_inner"></div>
    </div>
-    <table border="0" style=" margin-top: 20px;">
+    <table border="0" id="table">
         <tr>
             <td></td>
             <td></td>
@@ -87,28 +94,28 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td>
-                <label style ="font-size: 15px; color: #222222";>
+                <label id="label_s">
                     Business Name : [%place.placename%]
                 </label>
             </td>
         </tr>
         <tr>
             <td>
-                <label style ="font-size: 15px; color: #222222";>
+                <label id="label_s";>
                     Location : [%place.location%]
                 </label>
             </td>
         </tr>
             <td>
-                <label style ="font-size: 15px; color: #222222";>
+                <label id="label_s";>
                     Rate:[% place.rate %]
                 </label>
             </td>
         </tr>
     </table> 
     [%FOREACH review IN place.review%]
-    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;" class = "redmond ui-widget-content ui-corner-all" >
-    <table border="0" style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond ui-accordion-content ui-helper-reset  ui-accordion-content-active">
+    <div  id="div_s" class = "redmond ui-widget-content ui-corner-all" >
+    <table  class="redmond ui-accordion-content ui-helper-reset  ui-accordion-content-active">
         <tr>
             <td>
                 <label>
@@ -117,7 +124,7 @@ $(document).ready(function(){
                 <div>
                 [%i =0;%]
                 [%WHILE i < review.rate%]
-                <span class="ui-icon ui-icon-star" style="float: left"></span>
+                <span id ="span" class="ui-icon ui-icon-star" ></span>
                     [%i = i+1%]
                 [%END%]
                 </div>
