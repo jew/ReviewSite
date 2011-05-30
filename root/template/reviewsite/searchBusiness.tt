@@ -1,4 +1,15 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #table{
+            margin-top: 20px; 
+            font-size: 12px; 
+            color: #222222;"
+        }
+    </style>
+</head>
+<body>
 [% IF c.user_exists %]
     Which Business Would You Like to Review?
 [%ELSE%]
@@ -12,7 +23,7 @@
 [% # Add a link to add a review %]
 [%WHILE (place=places.next)%]
 
-    <table border="0" width="820px;" style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond  ui-widget-content ui-corner-all" >
+    <table id="table" width="820px;" class="redmond  ui-widget-content ui-corner-all" >
         <tr>
             <td><label>Business Name : [%place.placename%]</label></td>
             <td></td>
@@ -59,7 +70,8 @@
 [%END%]
 
 [%END%]
-
+</body>
+</html>
 
 
 

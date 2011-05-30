@@ -1,8 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #frame{
+            width: 810px; 
+            margin: 10pt auto; 
+            font-size: 12px; 
+            color: #222222; 
+            border: 1px solid #3BB9FF;"
+        }
+        #table{
+            margin-top: 20px;
+        }
+        .star_icon {
+             float: left;
+        }
+        .delete_icon{
+            float: left
+        }
+    
+    </style>
+</head>
+<body>
 [%WHILE (review = review_rs.next)%]
+<label style="width: 810px; margin: 10pt auto; font-size: 12px; color: #222222;"> 
 [%review.place.placename%]
+</label>
 </br>
-<div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
-    <table border="0" style=" margin-top: 20px;">
+<div  id="frame">
+    <table border="0" id="table">
         <tr>
             <td>
                 <label> 
@@ -11,7 +37,7 @@
                 <div>
                 [%i =0;%]
                 [%WHILE i < review.rate%]
-                <span class="ui-icon ui-icon-star" style="float: left"></span>
+                <span class="ui-icon ui-icon-star star_icon"></span>
                     [%i = i+1%]
                 [%END%]
                 </div>
@@ -25,7 +51,8 @@
             </td>
             </tr>
             <td>
-                <a href ="/review/[%review.review_id%]/delete"><span class="ui-icon ui-icon-circle-close" style="float: left"></span></a>
+                <a href ="/review/[%review.review_id%]/delete"><span class="ui-icon ui-icon-circle-close delete_icon" ></span></a>
+                <a href ="/review/[%review.review_id%]/edit"><span class="ui-icon ui-icon-pencil"></span></a>
             </td>
         </tr>
         <tr>
@@ -36,3 +63,7 @@
     </table> 
    </div>
 [%END%]
+</body>
+</html>
+
+

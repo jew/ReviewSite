@@ -74,6 +74,9 @@ $(document).ready(function(){
     height: 300px; 
     position: relative; 
 }
+.star_icon {
+    float: left;
+}
 </style>
 
 </head>
@@ -124,7 +127,7 @@ $(document).ready(function(){
                 <div>
                 [%i =0;%]
                 [%WHILE i < review.rate%]
-                <span id ="span" class="ui-icon ui-icon-star" ></span>
+                <span  class="ui-icon ui-icon-star star_icon" ></span>
                     [%i = i+1%]
                 [%END%]
                 </div>

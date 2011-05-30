@@ -68,12 +68,35 @@ $(document).ready(function(){
     
 });
 </script>
+<style>
+#text{
+    margin-top: 20px; 
+    font-size: 12px; 
+    color: #222222;"
+}
+#table_1{
+    margin-top: 20px;
+}
+#map_canvas{
+    width: 400px; 
+    height:300px; 
+    position: relative;"
+}
+#review{
+    width: 810px; 
+    margin: 10pt auto; 
+    border: 1px solid #3BB9FF;"
+}
+.star_icon {
+    float: left;
+}
+</style>
 </head>
 <body>
 [%form.render%]
 
-<div style=" margin-top: 20px; font-size: 12px; color: #222222;" class="redmond  ui-widget-content ui-corner-all ui-accordion-content ui-helper-reset  ui-accordion-content-active">
-    <table border="0" style=" margin-top: 20px;" >
+<div id="text"  class="redmond  ui-widget-content ui-corner-all ui-accordion-content ui-helper-reset  ui-accordion-content-active">
+    <table id="table_1" >
         <tr>
             <td></td>
             <td></td>
@@ -81,7 +104,7 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td></td>
-            <td><div style="width: 400px; height:300px; position: relative;" id="map_canvas"></div></td>
+            <td><div id="map_canvas"></div></td>
         </tr>
         <tr>
             <td></td>
@@ -104,7 +127,7 @@ $(document).ready(function(){
         </tr>
     </table> 
     [%FOREACH review IN place.review%]
-    <div  style="width: 810px; margin: 10pt auto; border: 1px solid #3BB9FF;">
+    <div id="review">
     <table border="0" style=" margin-top: 20px;">
         <tr>
             <td>
@@ -114,7 +137,7 @@ $(document).ready(function(){
                 <div>
                 [%i =0;%]
                 [%WHILE i < review.rate%]
-                <span class="ui-icon ui-icon-star" style="float: left"></span>
+                <span class="ui-icon ui-icon-star star_icon" ></span>
                     [%i = i+1%]
                 [%END%]
                 </div>
