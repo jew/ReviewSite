@@ -17,16 +17,6 @@ Catalyst Controller.
 =cut
 
 
-=head2 index
-
-=cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->response->body('Matched ReviewSite::Controller::Place in Place.');
-}
-
 =head2 base
 =cut
 
@@ -36,11 +26,10 @@ sub base :Chained( '/' ) :PathPart( 'place' ) :CaptureArgs( 1 ) {
 
 }
 
-
-
 =head2 show
 show all places 
 =cut
+
 sub show :Local {
 	my ( $self,$c ) = @_;
 	my $type_id     = $c->request->param( 'type_id' );
@@ -51,9 +40,8 @@ sub show :Local {
 }
 
 
-=head2 show
-SAND-136 
-Make a controller action that fetches all places of a given type 
+=head2 review
+SAND-136 Make a controller action that fetches all places of a given type 
 =cut
 
 sub review :Chained( 'base' ) :Args( 0 ) {

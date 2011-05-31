@@ -14,9 +14,7 @@ extends 'DBIx::Class::Core';
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
-
 ReviewSite::Schema::Result::Place
-
 =cut
 
 __PACKAGE__->table("places");
@@ -41,7 +39,6 @@ __PACKAGE__->table("places");
 
 =head2 long
 
-  accessor: 'firstname'
   data_type: 'varchar'
   is_nullable: 1
 
@@ -50,7 +47,7 @@ __PACKAGE__->table("places");
   data_type: 'varchar'
   is_nullable: 1'Place
 
-=head2 email
+=head2 type_id
 
   data_type: 'varchar'
   is_nullable: 1
@@ -58,6 +55,7 @@ __PACKAGE__->table("places");
 =cut
 
 __PACKAGE__->add_columns(
+
   "place_id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "placename",
@@ -68,7 +66,7 @@ __PACKAGE__->add_columns(
   {  data_type => "double", is_nullable => 1 },
   "location",
   { data_type => "varchar", is_nullable => 1 },
-  #from Type
+
    "type_id",
   { data_type => "integer", is_nullable => 0 },
 
@@ -80,13 +78,9 @@ __PACKAGE__-> belongs_to( "type","ReviewSite::Schema::Result::Type",
 __PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.place_id"=>"self.place_id"},
 );
-=head
-__PACKAGE__-> has_many( "review" => 'Gallery::Schema::Result::Review',
-{"foreign.place_id"=>"self.place_id"},
-);
-=cut
 
-=head2
+=head2 rate
+rate
 =cut
 
 sub rate {
@@ -96,6 +90,7 @@ sub rate {
 }
 
 =head2 count
+count
 =cut
 
 sub count {
@@ -103,7 +98,6 @@ sub count {
     return 0 if $self->review->count() == 0;
     return $self->review->count();
 }
-
 
 
 

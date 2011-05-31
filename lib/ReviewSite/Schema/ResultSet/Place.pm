@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use base 'DBIx::Class::ResultSet';
 
-=head2
+=head2 top3
 select top 3 
 =cut 
 
