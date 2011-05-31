@@ -1,0 +1,23 @@
+---
+action: 
+auto_fieldset: 1
+
+elements:
+
+      - name: email
+        label: Friend's Email Address
+        constraints:
+            - type: Email
+          
+      - type: Textarea
+        name: detail
+        cols: 30
+        rows: 5
+        label: Edit this text to suit your message
+  
+      - type: Submit
+        name: Submit
+        value: Invite Your Friends!
+      
+constraints:
+      - SingleValue

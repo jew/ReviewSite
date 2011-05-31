@@ -18,6 +18,7 @@ use Catalyst::Runtime 5.80;
 
 use Catalyst qw/
     ConfigLoader
+    StackTrace
     Static::Simple
     
     Authentication
@@ -25,6 +26,7 @@ use Catalyst qw/
     Session
     Session::Store::File
     Session::State::Cookie
+    Email
 /;
 
 extends 'Catalyst';
@@ -54,6 +56,97 @@ __PACKAGE__->config->{ 'Plugin::Authentication' } = {
         password_type   => 'clear', 
     },
 };
+__PACKAGE__->config->{ 'stacktrace' } = {
+	verbose => 1,
+};
+
+__PACKAGE__->config->{'Controller::HTML::FormFu'} = {
+	model_stash => {
+		schema => 'DB',
+	}
+};
+
+#for sending email
+__PACKAGE__->config->{email} = ['sendMail'];
+
+#To send using authenticated SMTP:
+
+__PACKAGE__->config->{email} = [
+        'SMTP', 
+        'localhost', 
+        #username => $USERNAME, 
+        #password => $PASSWORD, 
+];
+=head2
+__PACKAGE__->config(
+'View::Email::Template' => {
+        root => ReviewSite->path_to( 'root', 'template' ),
+        template_prefix => 'email',
+        stash_key => 'email',
+        content_type => 'text/html',
+        default => {
+            view => 'HTML',
+        },
+}
+);
+=cut
+
+
+#config for using Email::Template
+ __PACKAGE__->config(
+    'View::Email::Template' => {
+    # Where to look in the stash for the email information.
+    # 'email' is the default, so you don't have to specify it.
+    stash_key => 'email',
+    # Define the defaults for the mail
+    default => {
+	    # Defines the default content type (mime type). Mandatory
+	    content_type => 'text/html',
+	    # Defines the default charset for every MIME part with the 
+	    # content type text.
+	    # According to RFC2049 a MIME part without a charset should
+	    # be treated as US-ASCII by the mail client.
+	    # If the charset is not set it won't be set for all MIME parts
+	    # without an overridden one.
+	    # Default: none
+    charset => 'utf-8'
+    },
+    # Setup how to send the email
+    # all those options are passed directly to Email::Sender::Simple
+    sender => {
+        # if mailer doesn't start with Email::Sender::Simple::Transport::,
+        # then this is prepended.
+        mailer => 'SMTP',
+        # mailer_args is passed directly into Email::Sender::Simple 
+            mailer_args => {
+                Host     => 'localhost', # defaults to localhost
+            }
+        }
+    }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Start the application
 __PACKAGE__->setup();
 
