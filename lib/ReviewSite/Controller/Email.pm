@@ -43,8 +43,8 @@ sub invite :Local  :FormConfig {
         $c->error(0); # Reset the error condition if you need to
 	    $c->response->body('Oh noes!');
 	} else {
-	        $c->response->body( 'Email sent A-OK! (At least as far as we can tell)' );
-	}
+	        $c->response->body( 'Email sent A-OK!' );
+	   }
     }
 
 }

@@ -20,9 +20,7 @@ use Catalyst qw/
     ConfigLoader
     StackTrace
     Static::Simple
-    
     Authentication
-    
     Session
     Session::Store::File
     Session::State::Cookie
@@ -56,6 +54,7 @@ __PACKAGE__->config->{ 'Plugin::Authentication' } = {
         password_type   => 'clear', 
     },
 };
+
 __PACKAGE__->config->{ 'stacktrace' } = {
 	verbose => 1,
 };
@@ -65,32 +64,6 @@ __PACKAGE__->config->{'Controller::HTML::FormFu'} = {
 		schema => 'DB',
 	}
 };
-
-#for sending email
-__PACKAGE__->config->{email} = ['sendMail'];
-
-#To send using authenticated SMTP:
-
-__PACKAGE__->config->{email} = [
-        'SMTP', 
-        'localhost', 
-        #username => $USERNAME, 
-        #password => $PASSWORD, 
-];
-=head2
-__PACKAGE__->config(
-'View::Email::Template' => {
-        root => ReviewSite->path_to( 'root', 'template' ),
-        template_prefix => 'email',
-        stash_key => 'email',
-        content_type => 'text/html',
-        default => {
-            view => 'HTML',
-        },
-}
-);
-=cut
-
 
 #config for using Email::Template
  __PACKAGE__->config(
@@ -124,27 +97,6 @@ __PACKAGE__->config(
         }
     }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Start the application
