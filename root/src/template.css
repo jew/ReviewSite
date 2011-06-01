@@ -1,0 +1,91 @@
+
+#bodyframe{
+    margin-top: 20px; 
+    font-size: 12px; 
+    color: #222222;
+}
+
+#div_s{
+    width: 810px;
+    margin: 10pt auto;
+    border: 1px solid #3BB9FF;"
+}
+#map_canvas{
+    width: 400px; 
+    height: 300px; 
+    top: 20px;
+    position: relative; 
+}
+#table_text{
+            margin-top: 20px; 
+            font-size: 12px; 
+            color: #222222;"
+}
+
+#frame{
+    width: 810px; 
+    margin: 10pt auto; 
+    font-size: 12px; 
+    color: #222222; 
+    border: 1px solid #3BB9FF;"
+}
+
+#map_canvas_rest{
+    width: 300px; 
+    height: 200px; 
+    top: 20px;
+    left: 250px;
+    position: relative; 
+}
+
+#map_canvas2{
+    width: 300px;
+    height: 200px;
+    top: 20px;
+    left: 250px;
+    
+    position: relative;
+}
+#map_canvas_shop{
+    width: 300px;
+    height: 200px;
+    top: 20px;
+    left: 250px;
+    position: relative;
+}
+#map_canvas_night{
+    width: 300px;
+    height: 200px;
+    top: 20px;
+    left: 250px;
+    position: relative;
+}
+
+.star_icon {
+    float: left;
+}
+
+.star_icon {
+    float: left;
+}
+.delete_icon{
+    float: left
+}
+.formlabel{
+    font-size: 15px;
+    color: #222222";
+
+}
+.table{
+    margin-top: 20px;
+}
+.bodyframe{
+    margin-top: 20px; 
+    font-size: 12px; 
+    color: #222222;
+}
+.div_s{
+    width: 810px;
+    margin: 10pt auto;
+    border: 1px solid #3BB9FF;"
+}

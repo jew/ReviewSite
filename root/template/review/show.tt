@@ -1,25 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        #frame{
-            width: 810px; 
-            margin: 10pt auto; 
-            font-size: 12px; 
-            color: #222222; 
-            border: 1px solid #3BB9FF;"
-        }
-        #table{
-            margin-top: 20px;
-        }
-        .star_icon {
-             float: left;
-        }
-        .delete_icon{
-            float: left
-        }
-    
-    </style>
+<link type="text/css" href=  "[% c.uri_for('/src/template.css')%]" rel="Stylesheet" />
 </head>
 <body>
 [%WHILE (review = review_rs.next)%]
@@ -28,7 +10,7 @@
 </label>
 </br>
 <div  id="frame">
-    <table border="0" id="table">
+    <table border="0" class="table">
         <tr>
             <td>
                 <label> 

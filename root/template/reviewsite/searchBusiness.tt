@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
+<link type="text/css" href=  "[% c.uri_for('/src/template.css')%]" rel="Stylesheet" />
 <head>
-    <style>
-        #table{
-            margin-top: 20px; 
-            font-size: 12px; 
-            color: #222222;"
-        }
-    </style>
 </head>
 <body>
 [% IF c.user_exists %]
@@ -15,7 +9,7 @@
 [%ELSE%]
     Which Business Would You Like to Read?
 [%END%]
-<div style=" margin-top: 20px; font-size: 12px; color: #222222;">
+<div class="table_text">
 [%form.render%]
 </div>
 
@@ -23,7 +17,7 @@
 [% # Add a link to add a review %]
 [%WHILE (place=places.next)%]
 
-    <table id="table" width="820px;" class="redmond  ui-widget-content ui-corner-all" >
+    <table  width="820px;" class=" table_text redmond  ui-widget-content ui-corner-all" >
         <tr>
             <td><label>Business Name : [%place.placename%]</label></td>
             <td></td>
@@ -63,7 +57,7 @@
 
 [%ELSE%]
 [% IF c.user_exists %]
-<td>
+<td class="formlabel">
     [% # Add a link to add a review %]
     <a href="[%c.uri_for('/reviewsite/addPlace')%]">Dont have here !ADD</a>
     </td>
