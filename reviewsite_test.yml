@@ -1,0 +1,7 @@
+View::Email::Template:
+  default:
+    charset: utf-8
+    content_type: text/html
+  sender:
+    method: Test
+  stash_key: email
