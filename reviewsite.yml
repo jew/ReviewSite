@@ -1,0 +1,22 @@
+---
+name: ReviewSite
+Controller::HTML::FormFu:
+  model_stash:
+    schema: DB
+Plugin::Authentication:
+  default:
+    class: SimpleDB
+    password_type: clear
+    user_model: DB::User
+View::Email::Template:
+  default:
+    charset: utf-8
+    content_type: text/html
+  sender:
+    mailer: SMTP
+    mailer_args:
+      Host: BOOOO
+  stash_key: email
+disable_component_resolution_regex_fallback: 1
+stacktrace:
+  verbose: 1
