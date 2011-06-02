@@ -1,4 +1,4 @@
 
 [% email.body %]
-<br />
+<br/>
 Take a look  at http://localhost:3000/home

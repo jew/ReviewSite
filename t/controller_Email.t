@@ -12,28 +12,31 @@ $mech->get_ok( 'http://localhost:3000/login' );
 $mech->field( 'username', 'jew' );
 $mech->field( 'password', '123' );
 $mech->submit_form_ok() ;
-
+=head
 #test sending email
 $mech->get_ok( 'http://localhost:3000/email/invite' );
 $mech->title_is( 'Invite Friend' );
 $mech->field( 'email', 'a-lohana@hotmail.com' );
 $mech->field( 'detail', 'test' );
 $mech->submit_form_ok();
-
-# Clear 
-ok( Email::Send::Test->clear, '->clear returns true' );
-my $mailer = Email::Send->new();
-my $message ='Test';
+=cut
 my $sender = Email::Send->new( { mailer => 'Test' } );
-$sender->send( $message );
-my @emails = Email::Send::Test->emails;
-is( scalar( @emails ), 1, 'Sent 1 email' );
-is(@emails, 1, "got emails");
-isa_ok( $emails[0], 'Email::Simple', 'email is ok' );
-
+$sender->send( 'hello hello ' );
+# Clear first, just in case
+ok( Email::Send::Test->clear, '->clear returns true' );
+my $mailer = Email::Send->new( { mailer => 'Test' } );
+isa_ok( $mailer, 'Email::Send' );
+#test send
+ok( $mailer->send( 'test' ), '->send returns true' );
+is( scalar( Email::Send::Test->emails ), 1, 'Sending an email results in something in the trap' );
+#check body 
+ok( Email::Send::Test->send( 'Hello Hello' ), 'Sending Hello' );
+is( ( Email::Send::Test->emails )[1], 'Hello Hello', 'Check Hello' );
+ok( Email::Send::Test->clear, '->clear returns true' );
+is( scalar( Email::Send::Test->emails ), 0, '->clear clears the trap' );
 
 #test fail
-# mailer module that won't load
+#mailer module that won't load
 my $rv = $sender->mailer_available( "Test::Email::Send::Won't::Exist" );
 ok( !$rv, "failed to load mailer (doesn't exist)" ),
 like( "$rv", qr/can't locate/i, "and got correct exception" );
