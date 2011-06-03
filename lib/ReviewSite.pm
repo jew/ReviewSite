@@ -40,48 +40,41 @@ our $VERSION = '0.01';
 # with an external configuration file acting as an override for
 # local deployment.
 
+=head2
+
 __PACKAGE__->config(
     name => 'ReviewSite',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
-);
+    
+    'Plugin::Authentication' => {
+           default=> {  class           => 'SimpleDB',
+                        user_model      => 'DB::User',
+                        password_type   => 'clear', 
+                      },
+     },
+     
+    'stacktrace' => {verbose => 1, },
 
-#Simple Authen
-__PACKAGE__->config->{ 'Plugin::Authentication' } = {
-    default=> {
-        class           => 'SimpleDB',
-        user_model      => 'DB::User',
-        password_type   => 'clear', 
+    'Controller::HTML::FormFu' => {
+        model_stash => { schema => 'DB'},
     },
-};
-
-__PACKAGE__->config->{ 'stacktrace' } = {
-	verbose => 1,
-};
-
-__PACKAGE__->config->{'Controller::HTML::FormFu'} = {
-	model_stash => {
-		schema => 'DB',
-	}
-};
-
-#config for using Email::Template
- __PACKAGE__->config(
+    
     'View::Email::Template' => {
     # Where to look in the stash for the email information.
     # 'email' is the default, so you don't have to specify it.
     stash_key => 'email',
     # Define the defaults for the mail
     default => {
-	    # Defines the default content type (mime type). Mandatory
-	    content_type => 'text/html',
-	    # Defines the default charset for every MIME part with the 
-	    # content type text.
-	    # According to RFC2049 a MIME part without a charset should
-	    # be treated as US-ASCII by the mail client.
-	    # If the charset is not set it won't be set for all MIME parts
-	    # without an overridden one.
-	    # Default: none
+        # Defines the default content type (mime type). Mandatory
+        content_type => 'text/html',
+        # Defines the default charset for every MIME part with the 
+        # content type text.
+        # According to RFC2049 a MIME part without a charset should
+        # be treated as US-ASCII by the mail client.
+        # If the charset is not set it won't be set for all MIME parts
+        # without an overridden one.
+        # Default: none
     charset => 'utf-8'
     },
     # Setup how to send the email
@@ -95,8 +88,10 @@ __PACKAGE__->config->{'Controller::HTML::FormFu'} = {
                 Host     => 'localhost', # defaults to localhost
             }
         }
-    }
+    } 
 );
+
+=cut
 
 
 # Start the application
