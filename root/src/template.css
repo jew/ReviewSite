@@ -89,3 +89,14 @@
     margin: 10pt auto;
     border: 1px solid #3BB9FF;"
 }
+.category-header {
+	padding: 0 0 0 0;
+    font-size:12px;
+    font-weight: normal;
+}
+.clear {
+    clear: both;
+}
+.review-items {
+    padding: 4px 2px;
+}

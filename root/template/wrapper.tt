@@ -4,10 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" href=  "[% c.uri_for('/src/jquery-ui-1.8.12.custom/css/redmond/jquery-ui-1.8.12.custom.css')%]" rel="Stylesheet" />
 <link type="text/css" href=  "[% c.uri_for('/src/formfu.css')%]" rel="Stylesheet" />
+
 <script type="text/javascript" src=" [% c.uri_for('/src/jquery-ui-1.8.12.custom/js/jquery-1.5.1.min.js')%]"></script>
 <script type="text/javascript" src="[% c.uri_for('/src/jquery-ui-1.8.12.custom/js/jquery-ui-1.8.12.custom.min.js')%]"></script>
 
-
+<link type="text/css" href=  "[% c.uri_for('/src/template.css')%]" rel="Stylesheet" />
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <title>[%title%]</title>
 <style>
@@ -47,7 +50,7 @@ body {
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/login')%]">[Sign in]</a></li>
 	                [% ELSE %]
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/reviewsite/searchBusiness')%]">[Write a review]</a></li>
-	                <li class ="ui-state-default ui-corner-all">[Invite Friend]</li>
+	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/email/invite')%]">[Invite Friend]</a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/review/show')%]">[Your Review]<a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/logout')%]">[Sign Out]</a></li>
 	               [% END %]
@@ -55,10 +58,10 @@ body {
                 
                     <div>
                         <ul id="left_menu">
-                            <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="/place/show?type_id=1">Restaurants</a></span></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=2">Hotel</a></li>
+                            <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="/place/show?type_id=4">Restaurants</a></span></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=1">Hotel</a></li>
                             <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=3">Shopping</a></li>
-                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=4">Nightlife</a></li>
+                            <li><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left; margin-right:20px;"><a href="/place/show?type_id=2">Nightlife</a></li>
                         </ul>
                     </div>
                  <div style="margin: 0 auto; width: 830px; background-color: #ffffff; border: 0px solid black; padding: 0 0 0 40px;">
