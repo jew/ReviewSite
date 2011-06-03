@@ -25,28 +25,24 @@ Catalyst Controller.
 
 sub invite :Local  :FormConfig {
     my ( $self, $c ) = @_;  
+    my $form         = $c->stash->{ form };
     $c->stash( title => 'Invite Friend' );
-    my $form        = $c->stash->{ form };
     if ( $form->submitted_and_valid ) {
-        my $friend_email    = $form->param_value( 'email' );
-    	my $body            = $form->param_value( 'detail' );
+        my $friend_email   = $form->param_value( 'email' );
+    	my $body           = $form->param_value( 'detail' );
 	    $c->stash->{email} = {
-	        to            =>  $friend_email,
-	        from          => 'no-reply@foobar.com',
-	        subject       => 'Invite You Join ReviewSite',
-	        template      => 'sendMail.tt',
-	        content_type  => 'multipart/alternative',
-	        body          => $body ,
+	        to             =>  $friend_email,
+	        from           => 'no-reply@foobar.com',
+	        subject        => 'Invite You Join ReviewSite',
+	        template       => 'sendMail.tt',
+	        content_type   => 'multipart/alternative',
+	        body           => $body ,
         };        
     $c->forward( $c->view( 'Email::Template' ) );
-    if ( scalar( @{ $c->error } ) ) {
-        $c->error(0); # Reset the error condition if you need to
-	    $c->response->body('Oh noes!');
-	} else {
+    if ( scalar( !@{ $c->error } ) ) {
 	        $c->response->body( 'Email sent A-OK!' );
 	   }
     }
-
 }
 
 =head2 sendMail

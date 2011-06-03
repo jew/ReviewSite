@@ -1,4 +1,4 @@
 
 [% email.body %]
 <br/>
-Take a look  at http://localhost:3000/home
+Take a look  at [% c.uri_for('/home') %]

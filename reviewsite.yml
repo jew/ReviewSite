@@ -15,7 +15,7 @@ View::Email::Template:
   sender:
     mailer: SMTP
     mailer_args:
-      Host: BOOOO
+      Host: localhost
   stash_key: email
 disable_component_resolution_regex_fallback: 1
 stacktrace:
