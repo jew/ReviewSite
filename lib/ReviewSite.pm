@@ -40,6 +40,65 @@ our $VERSION = '0.01';
 # with an external configuration file acting as an override for
 # local deployment.
 
+
+ __PACKAGE__->config( 'Plugin::Authentication' => {
+     default_realm => 'facebook',
+     realms => {
+         facebook => {
+             credential => {
+                 class       => 'FBConnect',
+                 api_key     => 'b86b0de92ce880bd9c3c51d0798122f4',
+                 secret      => '16e3023bcfd9f61ae008ec16e6629056',
+                 app_name    => 'ReviewSite', 
+             }
+         },
+         dbic => {
+             credential => {
+                 class       => 'Password', 
+                 password_type => 'none',
+             },
+             store => {
+                 class       => 'DBIx::Class',
+                 user_class  => 'DB::User',
+                 id_field    => 'user_id'
+             }
+         },
+                    default=> {  class           => 'SimpleDB',
+                        user_model      => 'DB::User',
+                        password_type   => 'clear', 
+                      },
+     }
+ } );
+
+
+=head2 fb_user_update
+ Check for current facebook user, update if needed.
+=cut
+
+sub fb_user_update {
+    my ( $c, $user ) = @_;
+    my $cre  = $c->config->{ 'Plugin::Authentication' }
+                             ->{ realms }->{ facebook }->{ credential };
+    my $fb   = WWW::Facebook::API->new( desktop => 0,
+                                        api_key => $cre->{ api_key },
+                                        secret  => $cre->{ secret },
+                                       );
+    my $resp   =   $fb->users->get_info(
+        uids   =>  $c->user->session_uid,
+        fields =>  [ qw/first_name email last_name/ ]
+        );
+	my $user_Fb = $user->update_or_create( {
+	    credential_identifier   => $c->user->session_uid,
+        credential_source       => 'facebook',
+        email                   => $resp->[0]->{ email },
+        firstname               => $resp->[0]->{ first_name },
+        lastname                => $resp->[0]->{ last_name }
+        } ,
+	    { email => $resp->[0]->{ email } }
+    );
+
+    $c->user->{ user_id }   =  $user_Fb->user_id;
+}
 =head2
 
 __PACKAGE__->config(

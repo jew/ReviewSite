@@ -70,8 +70,17 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1 },
   "email",
   { data_type => "varchar", is_nullable => 1 },
+  #for FB
+  "credential_identifier", 
+  { data_type => 'varchar', is_nullable => 1 },
+  "credential_source",
+  { data_type => 'varchar', is_nullable => 1 },
+  
 );
 __PACKAGE__->set_primary_key( "user_id" );
+#for FB
+__PACKAGE__->add_unique_constraint( [qw/email/] );
+
 #set relationship later
 __PACKAGE__-> has_many( "review" => 'ReviewSite::Schema::Result::Review',
 {"foreign.user_id"=>"self.user_id"},

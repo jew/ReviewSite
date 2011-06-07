@@ -11,7 +11,6 @@
 <link type="text/css" href=  "[% c.uri_for('/src/template.css')%]" rel="Stylesheet" />
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
 <title>[%title%]</title>
 <style>
 #top_menu {
@@ -34,13 +33,16 @@ body {
     font : 13px;
     font-family: Arial,Helvetica,sans-serif;"
 }
+
 </style>
 
 </head>
 <body>
  <div id="body" class="redmond">
+     
+    
      <div class=" redmond" style="margin-top: 20px;">
-        <div style="margin: 0 auto; width: 830px;  background-color: #ffffff; border: 0px solid black; ">
+        <div style="margin: 0 auto; width: 880px;  background-color: #ffffff; border: 0px solid black; ">
             <div id = "main" class ="clearfix">
                 <ul id="top_menu">
                     <li class ="ui-state-default ui-corner-all" ><a href="[% c.uri_for('/home') %]">[Home]</a></li>
@@ -48,14 +50,19 @@ body {
 	                [% IF !c.user_exists %]
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/user/register')%]">[Register]</a></li>
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/login')%]">[Sign in]</a></li>
+                    <li style="float: right;"> 
+                        <div id="fb-root"></div>
+                        <a href="[%c.uri_for('/login/facebook')%]""> Login with Facebook</a>
+                    </li>
 	                [% ELSE %]
+	                
                     <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/reviewsite/searchBusiness')%]">[Write a review]</a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/email/invite')%]">[Invite Friend]</a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/review/show')%]">[Your Review]<a></li>
 	                <li class ="ui-state-default ui-corner-all"><a href="[%c.uri_for('/logout')%]">[Sign Out]</a></li>
 	               [% END %]
                 </ul>
-                
+
                     <div>
                         <ul id="left_menu">
                             <li ><span class="ui-icon ui-icon-heart" style="float: left"></span><span style="float: left ; margin-right:20px;"><a href="/place/show?type_id=4">Restaurants</a></span></li>
@@ -78,7 +85,9 @@ body {
     </div>
    <div class="grid_3 hot-sneaks" style="margin-top: 20px;">    
    </div>
+
 </div>  
+
 </body>
 </html>
 
