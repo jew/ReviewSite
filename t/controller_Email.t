@@ -1,13 +1,11 @@
 use strict;
 use warnings;
 use Test::More;
-#use Email::Send::Test;
 use Email::Sender::Simple;
 use Test::WWW::Mechanize::Catalyst;
 use ok 'Test::WWW::Mechanize::Catalyst' => 'ReviewSite';
 
 BEGIN { $ENV{EMAIL_SENDER_TRANSPORT} = 'Test' }
-#BEGIN { $ENV{'REVIEWSITE_CONFIG_LOCAL_SUFFIX'} = 'test'; }
 ok( my $mech = Test::WWW::Mechanize::Catalyst->new() );
 
 #test for login

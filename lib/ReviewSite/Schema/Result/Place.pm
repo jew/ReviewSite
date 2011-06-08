@@ -86,7 +86,10 @@ rate
 sub rate {
 	my ( $self ) = @_;
 	return 0 if $self->review->count() == 0;
-	return $self->review->get_column('rate')->sum()/$self->review->count();
+	my $number  = $self->review->get_column( 'rate' )->sum()/$self->review->count();
+	my $rounded = sprintf( "%.2f", $number );
+	return $rounded;
+	#return $self->review->get_column('rate')->sum()/$self->review->count();
 }
 
 =head2 count

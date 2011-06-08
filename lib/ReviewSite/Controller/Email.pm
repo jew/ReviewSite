@@ -8,7 +8,7 @@ use Email::MIME::Creator;
 use Carp qw/croak/;
 use Catalyst 'Email';
 
-BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
+BEGIN { extends 'Catalyst::Controller::HTML::FormFu'; }
 
 
 =head1 NAME
@@ -20,7 +20,7 @@ ReviewSite::Controller::Email - Catalyst Controller
 Catalyst Controller.
 =cut
 
-=head2 sendMail
+=head2 invite
 =cut 
 
 sub invite :Local  :FormConfig {
@@ -45,7 +45,6 @@ sub invite :Local  :FormConfig {
     }
 }
 
-=head2 sendMail
-=cut 
+
 __PACKAGE__->meta->make_immutable;
 1;
