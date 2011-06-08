@@ -58,7 +58,7 @@ elements:
         label: Your Review
         
       - type: Block
-        id: map_canvas
+        id: map_canvas_addPlace
        
 
       - type: Submit
