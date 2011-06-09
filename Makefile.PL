@@ -25,7 +25,7 @@ test_requires 'Test::WWW::Mechanize::Catalyst';
 catalyst;
 build_requires 'Catalyst::Devel';
 requires 'FindBin';
-requires 'HTML::FormFu::Constraint::Emai';
+requires 'HTML::FormFu::Constraint::Email';
 requires 'HTML::FormFu::Constraint::Equal';
 requires 'Email::MIME';
 requires 'Carp';
